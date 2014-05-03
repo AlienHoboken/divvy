@@ -28,7 +28,8 @@ app.get('/acccount', user.account);
 app.post('/user-snippet', user.snippet);
 app.get('/trending-user', user.trending);
 app.get('/trending-local', user.local);
-
+app.post('/newpost', user.newpost);
+app.post('/login');
 
 http.createServer(app).listen(app.get('port'), function(){
 	console.log('Express server listening on port ' + app.get('port'));
