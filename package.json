@@ -8,7 +8,8 @@
   "dependencies": {
     "express": "~4.1.1",
     "flat": "~1.1.0",
-    "async": "~0.2.9"
+    "async": "~0.2.9",
+    "redis": "~0.10.1"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

@@ -6,6 +6,7 @@ var express = require('express'),
 	http = require('http'),
 	path = require('path'),
 	user = require('./Routes/user');
+	redis = require('redis');
 
 // all environments
 app.set('port', 3000);
