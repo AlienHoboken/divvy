@@ -1,40 +1,16 @@
 /**
  * Module dependencies.
  */
-colors = require('colors');
-
 var express = require('express'),
 	app = express(),
 	http = require('http'),
 	path = require('path'),
-	engine = require('ejs-locals'),
-	passport = require('passport'),
-	redis = require('redis'),
-
-	db = require('./Model/db');
-// 	//auth = require('./Model/auth')(passport, LocalStrategy),
-	var user = require('./Routes/user')(db);
-// 	// indexRoute = require('./Routes/index')(db);
-
-// if (process.env.REDISTOGO_URL) {
-// 	var rtg   = require("url").parse(process.env.REDISTOGO_URL);
-// 	var redisClient = require("redis").createClient(rtg.port, rtg.hostname);
-// 	redisClient.auth(rtg.auth.split(":")[1]);
-// } else {
-// 	var redisClient = require("redis").createClient();
-// }
-
-// var cookieMaxAge = 90000000;
-// var sessionStore = new RedisStore({
-// 	client: redisClient,
-// });
+	user = require('./Routes/user');
 
 // all environments
-app.set('port', 80);
+app.set('port', 3000);
 app.set('views', path.join(__dirname, 'Views'));
-app.set('view engine', 'ejs');
-app.engine('ejs', engine);
-
+app.use(express.static(path.join(__dirname, 'Public')));
 
 app.get('/', user.home);
 app.get('/acccount', user.account);

@@ -1,28 +1,19 @@
-module.exports = function (db){
-	return {
-		account: function (req, res){
-			new_content( req, res, function (data){
-				// FIXME: build appropriate response
-				res.render('posts', { theBody: data, user: req.user, activePage: 'buzzfeed' });
-			});
-		},
-		home: function (req, res){
-			new_content( req, res, function (data){
-				// res.render('posts', { theBody: data, user: req.user, activePage: 'newfeed' });
-				res.render('posts', { theBody: data, user: req.user, activePage: 'newfeed' });
-			});
-		},
-		snippet: function (req, res){
-			new_content( req, res, function (data){
-				// res.render('posts', { theBody: data, user: req.user, activePage: 'newfeed' });
-				res.render('posts', { theBody: data, user: req.user, activePage: 'newfeed' });
-			});
-		},
-		trending: function (req, res){
-			res.send({});
-		},
-		local: function (req, res){
-			res.send({});
-		}
-	};
+exports.account = function (req, res){
+
+};
+
+exports.home = function (req, res){
+
+};
+
+exports.snippet = function (req, res){
+
+};
+
+exports.trending = function (req, res){
+	res.send({});
+};
+
+exports.local = function (req, res){
+	res.send({});
 };
