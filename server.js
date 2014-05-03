@@ -6,6 +6,7 @@ var express = require('express'),
 	http = require('http'),
 	path = require('path'),
 	user = require('./Routes/user'),
+	api = require('./Routes/api'),
 	redis = require('redis'),
 	logic = require('./Model/logic');
 
