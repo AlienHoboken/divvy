@@ -24,8 +24,17 @@ exports.newpost = function(req, res) {
     //send them back to home
 	res.redirect('/');
     response.end();
+
+    //update counts for skills
 }
 
+exports.signup = function(req, res) {
+	var username = req.param('username');
+	var password = req.param('password');
+	var email = req.param('email');
+	var name = req.param('name');
+}
 exports.login = function(req, res) {
-	
+	var username = req.param('username');
+	var password = req.param('password');
 }

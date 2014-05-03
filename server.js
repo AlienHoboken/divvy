@@ -24,10 +24,11 @@ app.use(express.static(path.join(__dirname, 'Public')));
 
 app.get('/', user.home);
 app.get('/account', user.account);
-
 app.post('/user-snippet', user.snippet);
 app.post('/newpost', user.newpost);
 app.post('/login', user.login);
+app.post('/signup', user.signup);
+
 
 app.get('/api/getposts', api.getposts);
 
