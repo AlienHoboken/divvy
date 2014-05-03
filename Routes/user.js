@@ -11,9 +11,17 @@ exports.snippet = function (req, res){
 };
 
 exports.trending = function (req, res){
-	res.send({});
+
 };
 
 exports.local = function (req, res){
-	res.send({});
+
+};
+
+exports.login = function (req, res){
+
+};
+
+exports.signup = function (req, res){
+
 };
