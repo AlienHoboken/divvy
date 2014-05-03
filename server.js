@@ -23,13 +23,13 @@ app.set('views', path.join(__dirname, 'Views'));
 app.use(express.static(path.join(__dirname, 'Public')));
 
 app.get('/', user.home);
-app.get('/acccount', user.account);
+app.get('/account', user.account);
 
 app.post('/user-snippet', user.snippet);
-app.get('/trending-user', user.trending);
-app.get('/trending-local', user.local);
 app.post('/newpost', user.newpost);
-app.post('/login');
+app.post('/login', user.login);
+
+app.get('/api/getposts', api.getposts);
 
 http.createServer(app).listen(app.get('port'), function(){
 	console.log('Express server listening on port ' + app.get('port'));
