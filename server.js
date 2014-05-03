@@ -14,8 +14,8 @@ var express = require('express'),
 
 	db = require('./Model/db'),
 	auth = require('./Model/auth')(passport, LocalStrategy),
-	userRoute = require('./routes/user')(db),
-	indexRoute = require('./routes/index')(db);
+	userRoute = require('./Routes/user')(db),
+	indexRoute = require('./Routes/index')(db);
 
 if (process.env.REDISTOGO_URL) {
 	var rtg   = require("url").parse(process.env.REDISTOGO_URL);
@@ -60,8 +60,8 @@ if ('development' == app.get('env')) {
 	app.use(express.errorHandler());
 }
 
-app.get('/', indexRoute.new_content);
-app.post('/collection', userRoute.addCollection);
+// app.get('/', );
+// app.post('/acccount', );
 
 
 http.createServer(app).listen(app.get('port'), function(){
