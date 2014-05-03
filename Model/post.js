@@ -8,4 +8,4 @@ module.exports = function() {
 		location: {city: "", state: "", zip: ""},
 		skills: []
 	}
-}
+};
