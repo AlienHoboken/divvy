@@ -6,7 +6,7 @@ exports.localPosts = function(user, posts) {
 		}
 	}
 	return localPosts;
-}
+};
 
 /*
   Returns posts related to a user's interest,
@@ -27,16 +27,30 @@ exports.relevantPosts = function(user, posts) {
 	return posts;
 }
 
+var postTrendiness = function(post) {
+	var skillValues = [];
+	for(var i = 0; i < post.skills.length; i++) {
+		skillValues.push(post.skills[i].trendiness);
+		postTrendiness = Math.max.apply(null, skillValues);
+	}
+};
+
 exports.localTrendingPosts = function(user, posts) {
 	posts = localPosts(user, posts);
+	for(var i = 0; i < posts.length; j++) {
+		posts[i].trendiness = postTrendiness(posts[i]);
+	}
 	posts = posts.sort(function(a, b) {return b.trendiness - a.trendiness});
 	return posts;
-}
+};
 
 exports.globalTrendingPosts = function(posts) {
+	for(var i = 0; i < posts.length; j++) {
+		posts[i].trendiness = postTrendiness(posts[i]);
+	}
 	posts = posts.sort(function(a, b) {return b.trendiness - a.trendiness});
 	return posts;
-}
+};
 
 exports.buildTrends = function(client, skills) {
 	var mon = client.HGETALL("monday");
@@ -59,5 +73,5 @@ exports.buildTrends = function(client, skills) {
 		skills[i].trendiness = total / 7.0;
 	}
 	return skills;
-}
+};
 return exports;
