@@ -1,0 +1,64 @@
+.post {
+  padding: 20px 10px;
+  margin-bottom: 3px;
+  color: #555;
+  background-color: rgba(149, 149, 149, .15);
+
+  &:first-child {
+    .border-radius(15px, 0, 0, 15px);
+  }
+
+  .avatar {
+    margin-right: 20px;
+    border: 5px solid @color-second;
+    .rounded(63px);
+  }
+
+  h1 {
+    margin-top: 3px;
+    margin-bottom: 0;
+    color: @color-second;
+    font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue";
+    text-transform: uppercase;
+
+    span {
+      color: #555;
+      font-size: .5em;
+    }
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+
+  .task {
+    font-style: italic;
+  }
+
+  .poster {
+
+    span {
+      font-weight: bold;
+    }
+  }
+
+  .rating {
+
+    .select {
+      color: @color-second;
+    }
+  }
+
+  .bounty {
+    font-weight: bold;
+    text-align: right;
+
+    p {
+
+      &:first-child {
+        color: @color-second;
+        font-size: 4em;
+      }
+    }
+  }
+}

@@ -1,11 +1,11 @@
 module.exports = function() {
 	return {
-		title = "",
+		title: "",
 		date: "",
 		bounty: "",
-		task = "",
-		poster = "",
-		location = {city: "", state: "", zip: ""},
-		skills = []
+		task: "",
+		poster: "",
+		location: {city: "", state: "", zip: ""},
+		skills: []
 	}
-}
+};

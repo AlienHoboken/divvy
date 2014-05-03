@@ -15,7 +15,8 @@
     "connect-redis": "~2.0.0",
     "passport": "~0.2.0",
     "passport-local": "~1.0.0",
-    "passport-local-mongoose": "~0.3.0"
+    "passport-local-mongoose": "~0.3.0",
+    "redis": "~0.10.1"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
