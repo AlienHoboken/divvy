@@ -12,9 +12,9 @@ var express = require('express'),
 	redis = require('redis'),
 	RedisStore = require('connect-redis')(express);
 
-	//db = require('./Model/db'),
+	var db = require('./Model/db');
 // 	//auth = require('./Model/auth')(passport, LocalStrategy),
-// 	// userRoute = require('./Routes/user')(db),
+	var user = require('./Routes/user')(db);
 // 	// indexRoute = require('./Routes/index')(db);
 
 // if (process.env.REDISTOGO_URL) {
@@ -60,8 +60,12 @@ if ('development' == app.get('env')) {
 	app.use(express.errorHandler());
 }
 
-// app.get('/', );
-// app.post('/acccount', );
+app.get('/', user.home);
+app.get('/acccount', user.account);
+
+app.post('/user-snippet', user.snippet);
+app.post('/trending-user', user.trending);
+app.post('/trending-local', user.local);
 
 
 http.createServer(app).listen(app.get('port'), function(){
