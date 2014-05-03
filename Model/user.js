@@ -3,8 +3,8 @@ module.exports = function() {
 		points: "",
 		name: "",
 		email: "",
-		location = {city: "", state: "", zip: ""},
-		skills = [],
-		interests = []
+		location: {city: "", state: "", zip: ""},
+		skills: [],
+		interests: []
 	}
 }
