@@ -19,16 +19,10 @@ module.exports = function (db){
 			});
 		},
 		trending: function (req, res){
-			new_content( req, res, function (data){
-				// res.render('posts', { theBody: data, user: req.user, activePage: 'newfeed' });
-				res.render('posts', { theBody: data, user: req.user, activePage: 'newfeed' });
-			});
+			res.send({});
 		},
 		local: function (req, res){
-			new_content( req, res, function (data){
-				// res.render('posts', { theBody: data, user: req.user, activePage: 'newfeed' });
-				res.render('posts', { theBody: data, user: req.user, activePage: 'newfeed' });
-			});
+			res.send({});
 		}
 	};
 };

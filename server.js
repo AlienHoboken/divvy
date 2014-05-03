@@ -64,8 +64,8 @@ app.get('/', user.home);
 app.get('/acccount', user.account);
 
 app.post('/user-snippet', user.snippet);
-app.post('/trending-user', user.trending);
-app.post('/trending-local', user.local);
+app.get('/trending-user', user.trending);
+app.get('/trending-local', user.local);
 
 
 http.createServer(app).listen(app.get('port'), function(){
