@@ -1,5 +1,4 @@
 module.exports = function(){
-	var bcrypt = require('bcrypt'),
 		SALT_WORK_FACTOR = 10,
 		mongoose = require('mongoose');
 
