@@ -1,18 +1,18 @@
 $(document).ready(function() {
 
-  $.get('/account', { user: 1 } function(data) {
+  $.get('/account', { user: 1 }, function(data) {
     console.log(data);
   });
 
-  $.get('/tranding-user', { user: 1 } function(data) {
+  $.get('/tranding-user', { user: 1 }, function(data) {
     console.log(data);
   });
 
-  $.get('/trending-local', { user: 1 } function(data) {
+  $.get('/trending-local', { user: 1 }, function(data) {
     console.log(data);
   });
 
-  $.get('/trending-snippet', { user: 1 } function(data) {
+  $.get('/trending-snippet', { user: 1 }, function(data) {
     console.log(data);
   });
 
