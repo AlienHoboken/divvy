@@ -2,18 +2,20 @@
 <html>
 <head>
   <title>Dashboard</title>
-  <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
   <link rel="stylesheet" href="css/styles.css" type="text/css" />
 </head>
 <body>
   <div class="container">
     <div class="row">
-      <div id="test"></div>
-      <div class="col-lg-10 col-lg-offset-1">
-        <header>
+      <header>
+        <div class="col-lg-2 col-lg-offset-1">
           <div id="logo">
-            <img src="http://placehold.it/400x200" />
+            <img src="images/logo.png" alt="Divvy Logo">
           </div>
+        </div><!-- end col-lg-2 -->
+        <div class="col-lg-6">
           <nav>
             <div class="searchform">
               <form id="mainsearch">
@@ -21,17 +23,23 @@
               </form>
             </div>
           </nav>
-        </header><!-- header -->
-      </div><!-- end col-lg-12 -->
+        </div><!-- end col-lg-8 -->
+        <div class="col-lg-2">
+          <a id="mylist" class="btn selected">MY LIST</a>
+          <a id="alllist" class="btn">ALL</a>
+        </div><!-- end col-lg-2 -->
+      </header><!-- header -->
     </div><!-- end row -->
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 feed">
+      <div class="post">
 
+      </div>
       </div>
     </div>
   </div><!-- end container -->
 
-  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-  <script type="text/javascript" src="js/scripts.js"></script>
+  <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script> -->
+  <!-- <script type="text/javascript" src="js/scripts.js"></script> -->
 </body>
 </html>

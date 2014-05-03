@@ -1,0 +1,27 @@
+html,
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+header {
+  margin-top: 30px;
+
+  .btn {
+    color: darken(@color-second, 40%);
+    font-size: 1.2em;
+    background-color: @color-second;
+    .rounded(15px);
+  }
+}
+
+#mainsearch {
+
+  input {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 7px;
+    border: 2px solid @color-second;
+    .rounded(15px);
+  }
+}
