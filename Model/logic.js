@@ -28,12 +28,36 @@ exports.relevantPosts = function(user, posts) {
 }
 
 exports.localTrendingPosts = function(user, posts) {
-	//posts = this.localPosts(user. posts);
-
+	posts = localPosts(user, posts);
+	posts = posts.sort(function(a, b) {return b.trendiness - a.trendiness});
+	return posts;
 }
 
 exports.globalTrendingPosts = function(posts) {
-
+	posts = posts.sort(function(a, b) {return b.trendiness - a.trendiness});
+	return posts;
 }
 
+exports.buildTrends = function(client, skills) {
+	var mon = client.HGETALL("monday");
+	var tue = client.HGETALL("tuesday");
+	var wed = client.HGETALL("wednesday");
+	var thu = client.HGETALL("thursday");
+	var fri = client.HGETALL("friday");
+	var sat = client.HGETALL("saturday");
+	var sun = client.HGETALL("sunday");
+
+	for(var i = 0; i < skills.length; i++) {
+		var total = 0;
+		total += (typeof mon[skills[i].name] !== 'undefined') ? mon[skills[i].name] : 0;
+		total += (typeof tue[skills[i].name] !== 'undefined') ? tue[skills[i].name] : 0;
+		total += (typeof wed[skills[i].name] !== 'undefined') ? wed[skills[i].name] : 0;
+		total += (typeof thu[skills[i].name] !== 'undefined') ? thu[skills[i].name] : 0;
+		total += (typeof fri[skills[i].name] !== 'undefined') ? fri[skills[i].name] : 0;
+		total += (typeof sat[skills[i].name] !== 'undefined') ? sat[skills[i].name] : 0;
+		total += (typeof sun[skills[i].name] !== 'undefined') ? sun[skills[i].name] : 0;
+		skills[i].trendiness = total / 7.0;
+	}
+	return skills;
+}
 return exports;
