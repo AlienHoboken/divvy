@@ -4,3 +4,42 @@ form {
     background-color: @color-base;
   }
 }
+
+#new-post {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: fade(@color-base, 50%);
+  .rounded(10px);
+
+  input,
+  textarea {
+    color: @color-base;
+    margin-bottom: 7px;
+    padding: 7px;
+    background: transparent;
+    border: 1px solid #fff;
+    .rounded(10px);
+    .drop-shadow(0, 0, 0, 0);
+    .ph(@color-base);
+  }
+
+  input[name=title],
+  input[name=location] {
+    width: 84%;
+  }
+
+  textarea {
+    width: 100%;
+  }
+
+  input[name=points],
+  input[type=submit] {
+    width: 15%;
+  }
+
+  input[type=submit] {
+    color: #fff;
+    background-color: @color-second;
+    border: none;
+  }
+}

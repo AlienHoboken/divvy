@@ -1,5 +1,9 @@
 $(document).ready(function() {
 
+  $('#new-post-toggle').click(function() {
+    $('#new-post').toggle({ duration: 750 });
+  });
+
   $.get('/account', { user: 1 }, function(data) {
     console.log(data);
   });
