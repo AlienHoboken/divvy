@@ -33,7 +33,7 @@ exports.relevantPosts = function(user, posts) {
 exports.postTrendiness = function(post) {
 	var skillValues = [];
 	for(var i = 0; i < post.skills.length; i++) {
-		skillValues.push(post.skills[i].trendiness);
+		skillValues.push(post.skills[i].trend_factor);
 		postTrendiness = Math.max.apply(null, skillValues);
 	}
 };
@@ -41,17 +41,17 @@ exports.postTrendiness = function(post) {
 exports.localTrendingPosts = function(user, posts) {
 	posts = localPosts(user, posts);
 	for(var i = 0; i < posts.length; j++) {
-		posts[i].trendiness = postTrendiness(posts[i]);
+		posts[i].trend_factor = postTrendiness(posts[i]);
 	}
-	posts = posts.sort(function(a, b) {return b.trendiness - a.trendiness;});
+	posts = posts.sort(function(a, b) {return b.trend_factor - a.trend_factor;});
 	return posts;
 };
 
 exports.globalTrendingPosts = function(posts) {
 	for(var i = 0; i < posts.length; i++) {
-		posts[i].trendiness = this.postTrendiness(posts[i]);
+		posts[i].trend_factor = this.postTrendiness(posts[i]);
 	}
-	posts = posts.sort(function(a, b) {return b.trendiness - a.trendiness;});
+	posts = posts.sort(function(a, b) {return b.trend_factor - a.trend_factor;});
 	return posts;
 };
 
@@ -66,14 +66,14 @@ exports.buildTrends = function(client, skills) {
 
 	for(var i = 0; i < skills.length; i++) {
 		var total = 0;
-		total += (typeof mon[skills[i].name] !== 'undefined') ? mon[skills[i].name] : 0;
-		total += (typeof tue[skills[i].name] !== 'undefined') ? tue[skills[i].name] : 0;
-		total += (typeof wed[skills[i].name] !== 'undefined') ? wed[skills[i].name] : 0;
-		total += (typeof thu[skills[i].name] !== 'undefined') ? thu[skills[i].name] : 0;
-		total += (typeof fri[skills[i].name] !== 'undefined') ? fri[skills[i].name] : 0;
-		total += (typeof sat[skills[i].name] !== 'undefined') ? sat[skills[i].name] : 0;
-		total += (typeof sun[skills[i].name] !== 'undefined') ? sun[skills[i].name] : 0;
-		skills[i].trendiness = total / 7.0;
+		total += (typeof mon[skills[i]] !== 'undefined') ? mon[skills[i]] : 0;
+		total += (typeof tue[skills[i]] !== 'undefined') ? tue[skills[i]] : 0;
+		total += (typeof wed[skills[i]] !== 'undefined') ? wed[skills[i]] : 0;
+		total += (typeof thu[skills[i]] !== 'undefined') ? thu[skills[i]] : 0;
+		total += (typeof fri[skills[i]] !== 'undefined') ? fri[skills[i]] : 0;
+		total += (typeof sat[skills[i]] !== 'undefined') ? sat[skills[i]] : 0;
+		total += (typeof sun[skills[i]] !== 'undefined') ? sun[skills[i]] : 0;
+		skills[i].trend_factor = total / 7.0;
 	}
 	return skills;
 };

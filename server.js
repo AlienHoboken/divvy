@@ -96,12 +96,18 @@ io.sockets.on('connection', function(socket) {
 	});
 });
 
+var skills = [{name: "Automotive",trend_factor: 0}, {name: "Music", trend_factor: 0}, 
+		{name: "Technology", trend_factor: 0}, {name: "Design", trend_factor: 0}, 
+		{name: "Public Speaking", trend_factor: 0}, {name: "Weaponship", trend_factor: 0}, 
+		{name: "Carpentry", trend_factor: 0}, {name: "Fashion", trend_factor: 0}, 
+		{name: "Dancing", trend_factor: 0}, {name: "Drinking", trend_factor: 0}]
+
 server.listen(app.get('port'), function(){
 	console.log('Express server listening on port ' + app.get('port'));
 
     //rebuild trends AFTER response if they are an hour or more stale
 	if(Date.now() - lastTrendRebuild >= 60 * 60 * 1000) {
-//		Logic.buildTrends(rclient, skills);
+		Logic.buildTrends(rclient, skills);
 		lastTrendRebuild = Date.now();
 	}
 });
