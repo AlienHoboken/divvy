@@ -45,10 +45,11 @@ module.exports = function(db){
 		},
 		update : function(req, res){
 			if(req.session.user) {
-				req.user.city = req.body.city;
-				req.user.state = req.body.state;
-				req.user.zip = req.body.zip;
-				db.updateUser(req.user, req.body.skills, req.body.interests, function(){
+				req.session.user.name = req.body.name;
+				req.session.user.city = req.body.city;
+				req.session.user.state = req.body.state;
+				req.session.user.zip = req.body.zip;
+				db.updateUser(req.session.user, req.body.skills, req.body.interests, function(){
 					res.redirect('/');
 				});
 			}
