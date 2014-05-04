@@ -1,9 +1,9 @@
 exports.home = function (req, res){
-
+	res.render('index');
 };
 
 exports.account = function (req, res){
-
+	res.render('account');
 };
 
 exports.snippet = function (req, res){

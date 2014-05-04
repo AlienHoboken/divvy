@@ -32,6 +32,7 @@ rclient.on("error", function (err) {
 // all environments
 app.set('port', 3000);
 app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 app.use(cookieParser()); // required before session.
 app.use(session({
   store: new RedisStore({
