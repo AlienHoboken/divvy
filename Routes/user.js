@@ -108,6 +108,16 @@ module.exports = function(db){
 			req.logout();
 			res.redirect('/');
 		},
+		globalposts : function(req,res){
+                        db.getPosts(function(err, posts) {
+                                if(!err) {
+                                        posts = Logic.globalTrendingPosts(posts);
+                                }
+                                res.send(JSON.stringify(posts));
+				res.end();
+                        });
+	
+		},
 		profile : function(req,res) {
 			var uname = req.params.username;
 			db.getUser(uname, function(err, user) {
