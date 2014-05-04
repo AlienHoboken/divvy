@@ -102,7 +102,7 @@ exports.addUser = function(body, callback){
 	var passwd;
 	console.log("adding user");
 	this.cryptPassword(body.password, function(err, hash) {
-		if(err === null) {
+		if(err == null || (typeof err == undefined)) {
 			console.log("Password passed");
 			passwd = hash;
 		} else {
