@@ -1,9 +1,13 @@
+<%
+var posts = {};
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Edit Account</title>
+  <title>Account</title>
 
   <link rel="stylesheet" href="css/bootstrap.min.css" />
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
@@ -34,14 +38,40 @@
           <input type="text" name="zip" placeholder="Zip" value="<%= user.zip || '' %>">
 
           <label for="skills">Skills</label>
-          <select multiple class="multiselect" id="skills" name="skills"></select>
+          <select multiple class="multiselect" id="postSkills" name="skills"></select>
 
           <label for="interests">Interests</label>
-          <select multiple class="multiselect" id="interests" name="interests"></select>
+          <select multiple class="multiselect" id="postInterests" name="interests"></select>
 
           <input class="btn btn-primary" type="submit" value="Submit" />
 
         </form>
+
+        <div class="filter-group">
+          <a class="btn selected" data-q="local">COLLECTED</a>
+          <a class="btn" data-q="releveant">POSTED</a>
+        </div>
+
+        <div id="posts">
+          <% if(posts) { for (var i = 0; i < posts.length; i++) { %>
+          <div class="post">
+            <div class="row">
+              <div class="col-lg-2">
+                <img class="avatar" src="http://placehold.it/100x100" />
+              </div>
+              <div class="col-lg-6">
+                <h1><%= posts[i].title %> <span class="date"><%= posts[i].date %></span></h1>
+                <p class="task">"<%= posts[i].task %>"</p>
+                <p class="poster">Submitted by: <span><%= posts[i].poster %></span></p>
+              </div>
+              <div class="col-lg-4 bounty">
+                <p><%= posts[i].bounty %></p>
+                <p>Points</p>
+              </div><!-- end bounty -->
+            </div><!-- end row -->
+          </div><!-- end post -->
+          <% } }%>
+          </div>
       </div>
 
     </div><!-- end row -->
