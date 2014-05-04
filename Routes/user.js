@@ -78,7 +78,6 @@ module.exports = function(db){
 		},
 		logout : function(req,res){
 			req.session.destroy();
-			req.session.save();
 			req.logout();
 			res.redirect('/');
 		}
