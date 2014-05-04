@@ -69,12 +69,12 @@ app.get('/api/getposts', api.getposts);
 
 app.get('/user', user.snippet);
 app.get('/listing',posting.post);
+app.get('/logout', user.logout);
 
 app.post('/update', user.update);
 
 app.post('/newpost', user.newpost);
 app.post('/login', auth.authenticate, user.login);
-app.post('/logout', user.logout);
 app.post('/signup', user.signup);
 
 io.sockets.on('connection', function(socket) {

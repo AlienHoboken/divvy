@@ -69,6 +69,7 @@ module.exports = function(db){
 			// console.log( Logic.relevantPosts(req.body.user, db.allPosts() ) );
 		},
 		logout : function(req,res){
+			req.session.destroy();
 			req.logout();
 			res.redirect('/');
 		}
