@@ -208,19 +208,19 @@ exports.updatePost = function(post, user, callback) {
 		}
 	};
 
-	User.findOneAndUpdate({_id: post._id}, newPost, function(err, updatedPost){
+	Post.findOneAndUpdate({_id: post._id}, newPost, function(err, updatedPost){
 		if(err) {
 			console.log(err);
 //			return callback(err);
 		}
-		console.log("updated user: " + updatePost);
+		console.log("updated user: " + updatedPost);
 		if(callback) return callback(null, updatedPost);
 	});
 };
 
 exports.getPosts = function(callback) {
 Post.find( function(err, posts) {
-	if (!err){ 
+	if (!err){
 		return callback(null, posts);
 	} else {
 		console.log(err);
@@ -232,7 +232,7 @@ Post.find( function(err, posts) {
 exports.getPostsByPoster = function(user, callback) {
 	var username = user.username;
 	Post.find( {_poster : username}, function(err, posts) {
-		if (!err){ 
+		if (!err){
 			return callback(null, posts);
 		} else {
 			console.log(err);

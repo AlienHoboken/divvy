@@ -139,15 +139,28 @@ weekday[6] = "Saturday";
   <script>
     $('#join-button').click(function() {
       var that = $(this),
-          bounty = that.parent().children(':first').text(),
-          title = that.parent().prev().children(':first').text(),
-          date = that.parent().prev().children(':first').children('span').text(),
-          date = that.parent().prev().children(':first').children('span').text();
+          bounty = that.parent().parent().children(':first').text(),
+          title = that.parent().parent().prev().children(':first').text(),
+          task = that.parent().parent().prev().children('.task').text(),
+          link = '',
+          ifCollected = false,
+          skills = 'none';
 
       // 'subscribe' user to post
       var data = {
-
+        link: link,
+        ifCollected: ifCollected,
+        task: task,
+        title: title,
+        bounty: bounty,
+        skills: skills
       };
+
+      console.log(data);
+
+      $.post('/update_post', data, function(data) {
+        console.log(data);
+      });
     });
   </script>
 </body>
