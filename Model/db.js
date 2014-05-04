@@ -19,6 +19,7 @@ var userSchema = mongoose.Schema({
 	name: String,
 	email: String,
 	passwordField: String,
+	saltValue: String,
 	points: Number,
 	skills: [String],
 	interest: [String],
@@ -80,12 +81,11 @@ exports.usernameTaken = function(uname) {
 };
 
 exports.addUser = function(body, callback) {
-	var passwd;
 	console.log("adding user");
 	credential.hash(body.password, function(err, hash) {
 		if(err) { console.log(err); return; }
-		passwd = JSON.parse(hash);
-	});
+		hash = JSON.parse(hash);
+
 /*		console.log("Checking username for password " + "hash");
 
 //	    if(exports.usernameTaken(body.username)) {
@@ -121,13 +121,14 @@ exports.addUser = function(body, callback) {
 			});
 //	    } //no user with this name
 //	});*/
-console.log(passwd);
+console.log(hash);
     if(!this.usernameTaken(body.username)) { //no user with this name
 	var newUser = new User({
 		username: body.username,
 		name: "",
 		email: body.email,
-		passwordField: body.password,
+		passwordField: hash.hash,
+		saltValue: hash.salt,
 		points: 0,
 		skills: [],
 		interest: [],
@@ -148,6 +149,7 @@ console.log(passwd);
 //			callback(null, newUser);
 		});
 	}
+});
 };
 
 exports.getUser = function(uname, callback) {
