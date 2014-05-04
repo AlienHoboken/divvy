@@ -1,13 +1,22 @@
+<% post = {
+  title: 'Testing One Two Three',
+  date: 'May 22 2014',
+  bounty: 25,
+  task: 'Do something for me, bitch! BlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlah',
+  poster: 'Alex Sears',
+  location: { city: 'Cincinnati', state: 'OH', zip: '45243' },
+  skills: ['Automobile']
+} %>
 <!DOCTYPE html>
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title><% post.title %></title>
+  <title><%= post.title %></title>
 
-  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/bootstrap.min.css" />
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
-  <link rel="stylesheet" href="css/styles.css" type="text/css" />
+  <link rel="stylesheet" href="/css/styles.css" type="text/css" />
 </head>
 <body>
     <div class="container">
@@ -15,14 +24,34 @@
       <div class="col-lg-2">
         <header>
           <div id="logo">
-            <a href="/"><img src="images/logo.png" alt="Divvy Logo"></a>
+            <a href="/"><img src="/images/logo.png" alt="Divvy Logo"></a>
           </div>
         </header><!-- header -->
       </div><!-- end col-lg-2 -->
 
       <div class="col-lg-8">
 
-        <h1><% post.title %></h1>
+        <div class="post single-post">
+          <div class="row">
+            <div class="col-lg-2">
+              <img class="avatar" src="http://placehold.it/100x100" />
+            </div>
+            <div class="col-lg-6">
+              <h1><%= post.title %> <span class="date"><%= post.date %></span></h1>
+              <p class="task">"<%= post.task %>"</p>
+              <p class="poster">Submitted by: <span><%= post.poster %></span></p>
+            </div>
+            <div class="col-lg-4 bounty">
+              <p><%= post.bounty %></p>
+              <p>Points</p>
+            </div><!-- end bounty -->
+            <div class="interested">
+             <% for (var i = 0; i < post.interested; i++) { %>
+              <a href="/account/<%= post.interested[i].username %>" title=""><%= post.interested[i].username %></a>
+             <% } %>
+            </div>
+          </div><!-- end row -->
+        </div><!-- end post -->
 
       </div>
 

@@ -52,10 +52,14 @@ module.exports = function(db){
 		},
 		update : function(req, res){
 			if(req.session.user) {
-				req.user.city = req.body.city;
-				req.user.state = req.body.state;
-				req.user.zip = req.body.zip;
-				db.updateUser(req.user, req.body.skills, req.body.interests, function(){
+				req.session.user.name = req.body.name;
+				req.session.user.email = req.body.email;
+				req.session.user.city = req.body.city;
+				req.session.user.state = req.body.state;
+				req.session.user.zip = req.body.zip;
+				req.session.user.skills = req.body.skills;
+				req.session.user.interest = req.body.interests;
+				db.updateUser(req.user, req.body.skills, req.body.interests, function(err, newUser){
 					res.redirect('/');
 				});
 			}
@@ -85,7 +89,6 @@ module.exports = function(db){
 		},
 		logout : function(req,res){
 			req.session.destroy();
-			req.session.save();
 			req.logout();
 			res.redirect('/');
 		}

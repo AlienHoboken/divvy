@@ -7,7 +7,6 @@ var express = require('express'),
 	router = express.Router(),
 	logger = require('morgan'),
 	methodOverride = require('method-override'),
-	bodyParser = require('body-parser'),
 	cookieParser = require('cookie-parser'),
 	session = require('express-session'),
 	RedisStore = require('connect-redis')(session),
@@ -68,6 +67,7 @@ app.get('/account', user.account);
 app.get('/api/getposts', api.getposts);
 app.get('/user', user.snippet);
 app.get('/listing/:id', posting.post);
+app.get('/logout', user.logout);
 
 app.post('/update', user.update);
 app.post('/newpost', user.newpost);
@@ -82,9 +82,11 @@ io.sockets.on('connection', function(socket) {
 		console.log("New post: " + data);
 		db.addPost({bounty:newPost.bounty, task:newPost.task, title:newPost.title, skills:newPost.skills.split(',')}, {username: newPost.username, city: newPost.city, state: newPost.state, zip: newPost.zip}, function(err, post) {
 			if(!err) {
-				socket.broadcast.emit('postmade', post);
+				console.log("Broadcasting new post!");
+//				socket.broadcast.emit('postmade', post);
 			} else {
-				socket.emit('posterror', err);
+				console.log("Failed to add post");
+				//socket.emit('posterror', err);
 			}
 		});
 	});

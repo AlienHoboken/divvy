@@ -21,7 +21,7 @@
 
         <% if (user) { %>
         <div id="user-info">
-          <p><%- (user.name) ? user.name : user.username %></p>
+          <p><%= user.name || 'New User' %></p>
           <a class="btn btn-primary">MY POSTS</a> <a class="btn btn-primary" href="/account"><i class="fa fa-pencil fa-lg"></i></a> <a class="btn btn-primary" href="/logout"><i class="fa fa-arrow-circle-o-right fa-lg"></i></a>
         </div>
 
@@ -66,7 +66,7 @@
         <div id="new-post" style="display:none;">
           <form id="postform">
             <input id="postTitle" type="text" name="title" placeholder="TITLE" />
-            <select id="postSkills" class="multiselect" type="text" name="skills" placeholder="SKILL" multiple></select>
+            <input id="postSkills" type="text" name="skills" placeholder="SKILL" />
             <input id="postPoints" type="text" name="points" placeholder="POINTS" />
             <textarea id="postTask" name="description" placeholder="DESCRIPTION"></textarea>
             <input id="new-post-submit" type="button" value="ADD">
@@ -107,20 +107,8 @@
   <% if(user) { %>
   <script>var user = JSON.parse(<%= user.passwordHash = "" %>'<%- JSON.stringify(user) %>');</script>
   <% } %>
-  <script>
-    var user_skills = [];
-    var user_interests = [];
-  </script>
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-  <script src="js/bootstrap.min.js" type="text/javascript"></script>
-  <script src="js/bootstrap-multiselect.js" type="text/javascript"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
-  <script type="text/javascript" src="js/account.js"></script>
-  <script>
-    $(document).ready(function() {
-      $('.multiselect').multiselect();
-    });
-  </script>
 </body>
 </html>

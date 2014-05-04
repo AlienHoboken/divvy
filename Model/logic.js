@@ -15,10 +15,12 @@ exports.localPosts = function(user, posts) {
 */
 exports.relevantPosts = function(user, posts) {
 	posts = this.localPosts(user, posts);
+	if(!user.interest)
+		return posts;
 	for(var i = 0; i < posts.length; i++) {
 		var interest_count = 0;
 		for(var j = 0; j < posts[i].skills.length; j++) {
-			if(user.interests.indexOf(posts[i].skills[j]) > -1) {
+			if(user.interest.indexOf(posts[i].skills[j]) > -1) {
 				interest_count++;
 			}
 		}
@@ -28,7 +30,7 @@ exports.relevantPosts = function(user, posts) {
 	return posts;
 };
 
-var postTrendiness = function(post) {
+exports.postTrendiness = function(post) {
 	var skillValues = [];
 	for(var i = 0; i < post.skills.length; i++) {
 		skillValues.push(post.skills[i].trendiness);
@@ -46,8 +48,8 @@ exports.localTrendingPosts = function(user, posts) {
 };
 
 exports.globalTrendingPosts = function(posts) {
-	for(var i = 0; i < posts.length; j++) {
-		posts[i].trendiness = postTrendiness(posts[i]);
+	for(var i = 0; i < posts.length; i++) {
+		posts[i].trendiness = this.postTrendiness(posts[i]);
 	}
 	posts = posts.sort(function(a, b) {return b.trendiness - a.trendiness;});
 	return posts;

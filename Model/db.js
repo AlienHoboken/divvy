@@ -129,12 +129,13 @@ exports.getUser = function(uname, callback) {
 };
 
 exports.updateUser = function(user, skills, interests, callback) {
-	console.log(user);
+	console.log(skills);
 	var newUser = new User({
-		username: user.username,
+		_id: user._id,
+//		username: user.username,
 		name: user.name,
 		email: user.email,
-		points: user.points,
+//		points: user.points,
 		skills: skills,
 		interest: interests,
 		location: {
@@ -146,11 +147,11 @@ exports.updateUser = function(user, skills, interests, callback) {
 
 	User.findOneAndUpdate({username: user.username}, newUser, function(err, updateUser){
 		if(err) {
-			console.log(err);
+			console.log("err: " + err);
 //			return callback(err);
 		}
 		console.log("updated user: " + updateUser);
-		if(callback) return callback();
+		return callback(null, updateUser);
 	});
 };
 
@@ -182,13 +183,13 @@ exports.addPost = function(post, user, callback) {
 		}
 	});
 
-	newPost.save(function(err, newPost) {
+	newPost.save(function(err, addedPost) {
 		if(err) {
 			console.log(err);
-//			return callback(err);
+			return callback(err);
 		}
-		console.log("new post: " + newPost);
-//		callback(null, newPost);
+		console.log("new post: " + addedPost);
+		callback(null, addedPost);
 	});
 };
 
