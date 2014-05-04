@@ -18,7 +18,7 @@ exports.relevantPosts = function(user, posts) {
 	for(var i = 0; i < posts.length; i++) {
 		var interest_count = 0;
 		for(var j = 0; j < posts[i].skills.length; j++) {
-			if(user.interests.indexOf(posts[i].skills[j]) > -1) {
+			if(user.interest.indexOf(posts[i].skills[j]) > -1) {
 				interest_count++;
 			}
 		}
