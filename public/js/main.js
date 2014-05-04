@@ -76,7 +76,7 @@ $(document).ready(function() {
   $('#trending-button').click(function() {
     $.get('api/globaltrending', function(data) {
       console.log(data);
-    })
+    });
   });
 
 });
