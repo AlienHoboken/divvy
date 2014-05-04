@@ -116,7 +116,7 @@ exports.getUser = function(uname, callback) {
 	});
 }
 
-exports.updateUser(user, skills, interests, callback) {
+exports.updateUser = function(user, skills, interests, callback) {
 	var newUser = new User({
 		username: body.username,
 		name: body.name,
