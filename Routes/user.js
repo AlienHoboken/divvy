@@ -16,7 +16,8 @@ module.exports = function(db){
 		},
 		account : function(req, res) {
 			if(req.session.user) {
-				res.render('account', {user: req.session.user});
+				var thePosts = exports.getPostsByPoster(req.session.user);
+				res.render('account', {user: req.session.user, posts: thePosts});
 			} else {
 				res.redirect('/');
 			}
@@ -32,7 +33,13 @@ module.exports = function(db){
 				}
 			});
 		},
-		getposts : function(req, res) {
+		getPostsByPoster : function(req, res) {
+			if(req.session.user) {
+				var poster = req.user.username;
+				db.getPostsByPoster(poster,function(err,posts){
+					res.send(posts);
+				});
+			}
 		},
 		newpost : function(req, res) {
 			db.addPost({bounty:req.body.bounty, task:req.body.task, title:req.body.title, skills:req.body.bounty.skills.split(',')}, req.session.user, function(err, post) {

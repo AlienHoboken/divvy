@@ -73,6 +73,7 @@ app.post('/update', user.update);
 app.post('/newpost', user.newpost);
 app.post('/login', auth.authenticate, user.login);
 app.post('/signup', user.signup);
+app.post('/update_post',posting.update);
 
 io.sockets.on('connection', function(socket) {
 	console.log("New io client connected.");
