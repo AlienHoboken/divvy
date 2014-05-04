@@ -74,14 +74,10 @@ app.post('/login', auth.authenticate, user.login);
 app.post('/logout', user.logout);
 app.post('/signup', user.signup);
 
-<<<<<<< HEAD
 io.on('newpost', function(socket){
 });
 
 server.listen(app.get('port'), function(){
-=======
-http.createServer(app).listen(app.get('port'), function(){
->>>>>>> 58510700fac83f808396db818627a5cbba04ac4a
 	console.log('Express server listening on port ' + app.get('port'));
 
     //rebuild trends AFTER response if they are an hour or more stale
