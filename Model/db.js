@@ -173,13 +173,13 @@ exports.addPost = function(post, user, callback) {
 		}
 	});
 
-	newPost.save(function(err, newPost) {
+	newPost.save(function(err, addedPost) {
 		if(err) {
 			console.log(err);
-//			return callback(err);
+			return callback(err);
 		}
-		console.log("new post: " + newPost);
-//		callback(null, newPost);
+		console.log("new post: " + addedPost);
+		callback(null, addedPost);
 	});
 };
 

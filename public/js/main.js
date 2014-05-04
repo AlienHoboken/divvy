@@ -29,6 +29,7 @@ alert("New post: " + post);
     newPost.title = $("#postTitle").val();
     newPost.skills = $("#postSkills").val();
     newPost.username = user.username;
+alert(JSON.stringify(user));
     newPost.city = user.location.city;
     newPost.state = user.location.state;
     newPost.zip = user.location.zip;

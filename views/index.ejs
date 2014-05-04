@@ -21,8 +21,8 @@
 
         <% if (user) { %>
         <div id="user-info">
-          <p>JUSTIN BOH</p>
-          <a class="btn btn-primary">MY POSTS</a> <a class="btn btn-primary"><i class="fa fa-pencil fa-lg"></i></a> <a class="btn btn-primary" href="/logout"><i class="fa fa-arrow-circle-o-right fa-lg"></i></a>
+          <p><%- (user.name) ? user.name : user.username %></p>
+          <a class="btn btn-primary">MY POSTS</a> <a class="btn btn-primary" href="/account"><i class="fa fa-pencil fa-lg"></i></a> <a class="btn btn-primary" href="/logout"><i class="fa fa-arrow-circle-o-right fa-lg"></i></a>
         </div>
 
         <% } else { %>

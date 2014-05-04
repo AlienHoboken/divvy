@@ -81,9 +81,11 @@ io.sockets.on('connection', function(socket) {
 		console.log("New post: " + data);
 		db.addPost({bounty:newPost.bounty, task:newPost.task, title:newPost.title, skills:newPost.skills.split(',')}, {username: newPost.username, city: newPost.city, state: newPost.state, zip: newPost.zip}, function(err, post) {
 			if(!err) {
-				socket.broadcast.emit('postmade', post);
+				console.log("Broadcasting new post!");
+//				socket.broadcast.emit('postmade', post);
 			} else {
-				socket.emit('posterror', err);
+				console.log("Failed to add post");
+				//socket.emit('posterror', err);
 			}
 		});
 	});

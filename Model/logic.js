@@ -28,7 +28,7 @@ exports.relevantPosts = function(user, posts) {
 	return posts;
 };
 
-var postTrendiness = function(post) {
+exports.postTrendiness = function(post) {
 	var skillValues = [];
 	for(var i = 0; i < post.skills.length; i++) {
 		skillValues.push(post.skills[i].trendiness);
@@ -46,8 +46,8 @@ exports.localTrendingPosts = function(user, posts) {
 };
 
 exports.globalTrendingPosts = function(posts) {
-	for(var i = 0; i < posts.length; j++) {
-		posts[i].trendiness = postTrendiness(posts[i]);
+	for(var i = 0; i < posts.length; i++) {
+		posts[i].trendiness = this.postTrendiness(posts[i]);
 	}
 	posts = posts.sort(function(a, b) {return b.trendiness - a.trendiness;});
 	return posts;
