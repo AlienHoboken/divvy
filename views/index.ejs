@@ -1,3 +1,12 @@
+<% posts = [{
+  title: 'This is a test!',
+  date: 'May 22, 2014',
+  bounty: 400,
+  task: 'This is just a test guys. For real though? We need more eyebrows!',
+  poster: 'Alex Sears',
+  location: {city: 'Cincinnati', state: 'OH', zip: '45243'},
+  skills: ['Car', 'Drums', 'Drinking']
+  }]; %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,11 +34,11 @@
         </div>
 
         <div id="sign-up" style="display:none;">
-          <form>
-            <input type="text" name="name" placeholder="Name" />
+          <form action="/signup" method="POST">
+            <input type="text" name="name" placeholder="Username" />
             <input type="text" name="email" placeholder="Email" />
-            <input type="text" name="password" placeholder="Password" />
-            <input type="text" name="password_confirmation" placeholder="Confirm Password" />
+            <input type="password" name="password" placeholder="Password" />
+            <input type="password" name="password_confirmation" placeholder="Confirm Password" />
             <input type="submit" value="GO" />
           </form>
         </div>
@@ -37,9 +46,14 @@
         <div id="sign-in" style="display:none;">
           <form>
             <input type="text" name="name" placeholder="Name" />
-            <input type="text" name="password" placeholder="Password" />
+            <input type="password" name="password" placeholder="Password" />
             <input type="submit" value="GO" />
           </form>
+        </div>
+
+        <div id="user-info">
+          <p>JUSTIN BOH</p>
+          <a class="btn btn-primary">MY POSTS</a> <a class="btn btn-primary"><i class="fa fa-pencil fa-lg"></i></a> <a class="btn btn-primary"><i class="fa fa-arrow-circle-o-right fa-lg"></i></a>
         </div>
       </div><!-- end col-lg-2 -->
 
@@ -70,125 +84,25 @@
           <a class="btn">ABC</a>
         </div>
 
+        <% for (var i = 0; i < posts.length; i++) { %>
         <div class="post">
           <div class="row">
             <div class="col-lg-2">
               <img class="avatar" src="http://placehold.it/100x100" />
             </div>
             <div class="col-lg-6">
-              <h1>OIL CHANGE <span class="date">05.03.14</span></h1>
-              <p class="task">"I want to learn how to change my car's oil!"</p>
-              <p class="poster">Submitted by: <span>Justin Boh</span></p>
-              <div class="rating">
-                <i class="fa fa-star select"></i>
-                <i class="fa fa-star select"></i>
-                <i class="fa fa-star select"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-              </div>
+              <h1><%= posts[i].title %> <span class="date"><%= posts[i].date %></span></h1>
+              <p class="task">"<%= posts[i].task %>"</p>
+              <p class="poster">Submitted by: <span><%= posts[i].poster %></span></p>
             </div>
             <div class="col-lg-4 bounty">
-              <p>25</p>
-              <p>Points</p>
-            </div><!-- end bounty -->
-        </div><!-- end row -->
-        </div><!-- end post -->
-
-        <div class="post">
-          <div class="row">
-            <div class="col-lg-2">
-              <img class="avatar" src="http://placehold.it/100x100" />
-            </div>
-            <div class="col-lg-6">
-              <h1>OIL CHANGE <span class="date">05.03.14</span></h1>
-              <p class="task">"I want to learn how to change my car's oil!"</p>
-              <p class="poster">Submitted by: <span>Justin Boh</span></p>
-              <div class="rating">
-                <i class="fa fa-star select"></i>
-                <i class="fa fa-star select"></i>
-                <i class="fa fa-star select"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-              </div>
-            </div>
-            <div class="col-lg-4 bounty">
-              <p>25</p>
-              <p>Points</p>
-            </div><!-- end bounty -->
-        </div><!-- end row -->
-        </div><!-- end post -->
-
-        <div class="post">
-          <div class="row">
-            <div class="col-lg-2">
-              <img class="avatar" src="http://placehold.it/100x100" />
-            </div>
-            <div class="col-lg-6">
-              <h1>OIL CHANGE <span class="date">05.03.14</span></h1>
-              <p class="task">"I want to learn how to change my car's oil!"</p>
-              <p class="poster">Submitted by: <span>Justin Boh</span></p>
-              <div class="rating">
-                <i class="fa fa-star select"></i>
-                <i class="fa fa-star select"></i>
-                <i class="fa fa-star select"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-              </div>
-            </div>
-            <div class="col-lg-4 bounty">
-              <p>25</p>
-              <p>Points</p>
-            </div><!-- end bounty -->
-        </div><!-- end row -->
-        </div><!-- end post -->
-
-        <div class="post">
-          <div class="row">
-            <div class="col-lg-2">
-              <img class="avatar" src="http://placehold.it/100x100" />
-            </div>
-            <div class="col-lg-6">
-              <h1>OIL CHANGE <span class="date">05.03.14</span></h1>
-              <p class="task">"I want to learn how to change my car's oil!"</p>
-              <p class="poster">Submitted by: <span>Justin Boh</span></p>
-              <div class="rating">
-                <i class="fa fa-star select"></i>
-                <i class="fa fa-star select"></i>
-                <i class="fa fa-star select"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-              </div>
-            </div>
-            <div class="col-lg-4 bounty">
-              <p>25</p>
-              <p>Points</p>
-            </div><!-- end bounty -->
-        </div><!-- end row -->
-        </div><!-- end post -->
-
-        <div class="post">
-          <div class="row">
-            <div class="col-lg-2">
-              <img class="avatar" src="http://placehold.it/100x100" />
-            </div>
-            <div class="col-lg-6">
-              <h1>OIL CHANGE <span class="date">05.03.14</span></h1>
-              <p class="task">"I want to learn how to change my car's oil!"</p>
-              <p class="poster">Submitted by: <span>Justin Boh</span></p>
-              <div class="rating">
-                <i class="fa fa-star select"></i>
-                <i class="fa fa-star select"></i>
-                <i class="fa fa-star select"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-              </div>
-            </div>
-            <div class="col-lg-4 bounty">
-              <p>25</p>
+              <p><%= posts[i].bounty %></p>
               <p>Points</p>
             </div><!-- end bounty -->
           </div><!-- end row -->
         </div><!-- end post -->
+        <% } %>
+
       </div><!-- end feed -->
     </div><!-- end row -->
   </div><!-- end container -->

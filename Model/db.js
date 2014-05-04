@@ -1,25 +1,6 @@
 var mongoose = require('mongoose'),
-	bcrypt = require('bcrypt');
-
-exports.cryptPassword = function(password, callback) {
-   bcrypt.genSalt(10, function(err, salt) {
-    if (err) 
-      return callback(err);
-
-    bcrypt.hash(password, salt, function(err, hash) {
-      return callback(err, hash);
-    });
-
-  });
-};
-
-exports.comparePassword = function(password, userPassword, callback) {
-   bcrypt.compare(password, userPassword, function(err, isPasswordMatch) {
-      if (err) 
-        return callback(err);
-      return callback(null, isPasswordMatch);
-   });
-};
+	db = mongoose.connection,
+	credential = require('credential');
 
 // Connect to Mongo
 var uristring = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/divvy';
@@ -86,12 +67,16 @@ Post = mongoose.model('Post', postSchema);
 Skill = mongoose.model('Skill', skillSchema);
 
 exports.usernameTaken = function(uname) {
-	User.find({username: uname}, function (err, users) {
-		if (err) { console.log(err); }
+	console.log("in usernametaken");
+	User.findOne({username: uname}, function (err, users) {
+    	if (err) { console.log(err); }
 
         if(!users) { //no user with this name
-			return false;
+        	console.log("free name");
+        	return false;
 		} else {
+			console.log("no free name");
+			console.log(users)
 			return true;
 		}
 	});
@@ -99,20 +84,20 @@ exports.usernameTaken = function(uname) {
 
 exports.addUser = function(body, callback){
 	var passwd;
-	this.cryptPassword(body.password, function(err, hash) {
-		if(err === null) {
-			passwd = hash;
-		} else {
-			return callback(err);
-		}
+	console.log("adding user");
+	credential.hash(body.password, function(err, hash) {
+		if(err) { console.log(err); return; }
+		passwd = hash;
 	});
+	console.log("Checking username");
     if(!this.usernameTaken(body.username)) { //no user with this name
+    	console.log("adding user2");
 	var newUser = new User({
 		username: body.username,
 		name: "",
 		email: body.email,
 		points: 0,
-		password: hash,
+		password: passwd,
 		skills: [],
 		interest: [],
 		location: {
@@ -129,8 +114,10 @@ exports.addUser = function(body, callback){
 				return callback(err);
 			}
 			console.log("new user: " + newUser);
-			callback(null, newUser);
+			//callback(null, newUser);
 		});
+	} else {
+		console.log("No new user");
 	}
 };
 

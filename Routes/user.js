@@ -16,16 +16,17 @@ exports.getposts = function(req, res, db) {
 
 };
 
-exports.newpost = function(req, res, db) {
-	//get parameters from post
+exports.newpost = function(req, res) {
+	//get parameters from post1
 
     //update counts for skills
 };
 
-exports.signup = function(req, res, db) {
-	var uname = req.body.user.username;
-	var passwd = req.body.user.password;
-	var em = req.body.user.email;
+exports.signup = function(db) {
+	return function(req, res) {
+	var uname = req.body.username;
+	var passwd = req.body.password;
+	var em = req.body.email;
 	db.addUser({username: uname, email: em, password: passwd}, function(err, user){
 		if(err == null) {
 			//do something with user variable
@@ -37,6 +38,7 @@ exports.signup = function(req, res, db) {
 // add new user
 // log new user in
 // return new content
+	}
 };
 
 exports.login = function(req, res, db) {
