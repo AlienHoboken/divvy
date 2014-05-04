@@ -22,7 +22,8 @@
     "bson": "~0.2.7",
     "errorhandler": "~1.0.1",
     "ejs": "~1.0.0",
-    "credential": "~0.2.5"
+    "credential": "~0.2.5",
+    "mongoose": "~3.8.8"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

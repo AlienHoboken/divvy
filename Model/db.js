@@ -57,6 +57,12 @@ userSchema.pre('save', function(next) {
 
 	if(!user.isModified('password')) return next();
 
+	credential.hash(body.password, function(err, hash) {
+		if(err) { console.log(err); return; }
+		var passwd = hash;
+		next();
+	});
+
 });
 
 userSchema.methods.comparePassword = function(candidatePassword, cb) {
@@ -66,59 +72,33 @@ User = mongoose.model('User', userSchema);
 Post = mongoose.model('Post', postSchema);
 Skill = mongoose.model('Skill', skillSchema);
 
-exports.usernameTaken = function(uname, callback) {
-	console.log("in usernametaken");
-	User.findOne({username: uname}, function (err, users) {
-    	if (err) { console.log(err); }
-
-        if(!users) { //no user with this name
-        	console.log("free name");
-        	callback(false);
-		} else {
-			console.log("no free name");
-			console.log(users)
-			callback(true);
-		}
-	});
-};
-
 exports.addUser = function(body, callback) {
 	console.log("adding user");
-	credential.hash(body.password, function(err, hash) {
-		if(err) { console.log(err); return; }
-		var passwd = hash;
+	console.log("adding user2");
 	
-		console.log("Checking username for password " + hash);
-	    exports.usernameTaken(body.username, function(taken) {
-	    	if(!taken) {
-	    	console.log("adding user2");
-			
-			var newUser = new User({
-			username: body.username,
-			name: "",
-			email: body.email,
-			points: 0,
-			password: passwd,
-			skills: [],
-			interest: [],
-			location: {
-				city: "",
-				state: "",
-				zip: ""
-			}
-			});
-			console.log("made object");
-    
-			newUser.save(function(err, newUser){
-				if(err) {
-					console.log(err);
-					return callback(err);
-				}
-				console.log("new user: " + newUser);
-				//callback(null, newUser);
-			});
-			}
-	    }); //no user with this name
+	var newUser = new User({
+		username: body.username,
+		name: "",
+		email: body.email,
+		points: 0,
+		password: body.password,
+		skills: [],
+		interest: [],
+		location: {
+			city: "",
+			state: "",
+			zip: ""
+		}
+	});
+	console.log("made object");
+
+	newUser.save(function(err, newUser){
+		if(err) {
+			console.log(err);
+			return callback(err);
+		}
+		console.log("new user: " + newUser);
+		callback(null, newUser);
 	});
 };
 
