@@ -33,7 +33,11 @@ module.exports = function(db){
 			var em = req.body.email;
 			db.addUser({username: uname, email: em, password: passwd}, function(err, user){
 				if(!err ) {
-					//do something with user variable
+					req.logIn(user, function(err) {
+						if (err) { return next(err); }
+						req.session.user = user;
+						console.log(user.username + " login successful");
+					});					
 					res.redirect('/account');
 				} else {
 					res.send('Error registering.');
