@@ -19,10 +19,177 @@
           </div>
         </header><!-- header -->
 
-        <%- partial('partials/_user_forms.ejs') %>
+        <div class="user-forms">
+          <button id="sign-up-toggle" class="btn btn-primary">SIGN UP</button>
+          <button id="sign-in-toggle" class="btn btn-primary">LOG IN</button>
+        </div>
+
+        <div id="sign-up" style="display:none;">
+          <form>
+            <input type="text" name="name" placeholder="Name" />
+            <input type="text" name="email" placeholder="Email" />
+            <input type="text" name="password" placeholder="Password" />
+            <input type="text" name="password_confirmation" placeholder="Confirm Password" />
+            <input type="submit" value="GO" />
+          </form>
+        </div>
+
+        <div id="sign-in" style="display:none;">
+          <form>
+            <input type="text" name="name" placeholder="Name" />
+            <input type="text" name="password" placeholder="Password" />
+            <input type="submit" value="GO" />
+          </form>
+        </div>
       </div><!-- end col-lg-2 -->
 
-      <%- partial('partials/feed.ejs') %>
+      <div class="col-lg-8 feed">
+        <nav>
+          <div class="searchform">
+            <div id="mainsearch">
+              <input type="text" name="searchbar" placeholder="Search" />
+              <i class="fa fa-search fa-lg"></i>
+              <a class="btn btn-primary" id="new-post-toggle"><i class="fa fa-plus fa-lg"></i></a>
+            </div>
+          </div>
+        </nav>
+
+        <div id="new-post" style="display:none;">
+          <form>
+            <input type="text" name="title" placeholder="SKILL" />
+            <input type="text" name="points" placeholder="POINTS" />
+            <textarea name="description" placeholder="DESCRIPTION"></textarea>
+            <input type="text" name="location" placeholder="LOCATION" />
+            <input type="submit" value="ADD">
+          </form>
+        </div>
+
+        <div class="filter-group">
+          <a class="btn selected">LOCAL</a>
+          <a class="btn">RELEVANT</a>
+          <a class="btn">ABC</a>
+        </div>
+
+        <div class="post">
+          <div class="row">
+            <div class="col-lg-2">
+              <img class="avatar" src="http://placehold.it/100x100" />
+            </div>
+            <div class="col-lg-6">
+              <h1>OIL CHANGE <span class="date">05.03.14</span></h1>
+              <p class="task">"I want to learn how to change my car's oil!"</p>
+              <p class="poster">Submitted by: <span>Justin Boh</span></p>
+              <div class="rating">
+                <i class="fa fa-star select"></i>
+                <i class="fa fa-star select"></i>
+                <i class="fa fa-star select"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+              </div>
+            </div>
+            <div class="col-lg-4 bounty">
+              <p>25</p>
+              <p>Points</p>
+            </div><!-- end bounty -->
+        </div><!-- end row -->
+        </div><!-- end post -->
+
+        <div class="post">
+          <div class="row">
+            <div class="col-lg-2">
+              <img class="avatar" src="http://placehold.it/100x100" />
+            </div>
+            <div class="col-lg-6">
+              <h1>OIL CHANGE <span class="date">05.03.14</span></h1>
+              <p class="task">"I want to learn how to change my car's oil!"</p>
+              <p class="poster">Submitted by: <span>Justin Boh</span></p>
+              <div class="rating">
+                <i class="fa fa-star select"></i>
+                <i class="fa fa-star select"></i>
+                <i class="fa fa-star select"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+              </div>
+            </div>
+            <div class="col-lg-4 bounty">
+              <p>25</p>
+              <p>Points</p>
+            </div><!-- end bounty -->
+        </div><!-- end row -->
+        </div><!-- end post -->
+
+        <div class="post">
+          <div class="row">
+            <div class="col-lg-2">
+              <img class="avatar" src="http://placehold.it/100x100" />
+            </div>
+            <div class="col-lg-6">
+              <h1>OIL CHANGE <span class="date">05.03.14</span></h1>
+              <p class="task">"I want to learn how to change my car's oil!"</p>
+              <p class="poster">Submitted by: <span>Justin Boh</span></p>
+              <div class="rating">
+                <i class="fa fa-star select"></i>
+                <i class="fa fa-star select"></i>
+                <i class="fa fa-star select"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+              </div>
+            </div>
+            <div class="col-lg-4 bounty">
+              <p>25</p>
+              <p>Points</p>
+            </div><!-- end bounty -->
+        </div><!-- end row -->
+        </div><!-- end post -->
+
+        <div class="post">
+          <div class="row">
+            <div class="col-lg-2">
+              <img class="avatar" src="http://placehold.it/100x100" />
+            </div>
+            <div class="col-lg-6">
+              <h1>OIL CHANGE <span class="date">05.03.14</span></h1>
+              <p class="task">"I want to learn how to change my car's oil!"</p>
+              <p class="poster">Submitted by: <span>Justin Boh</span></p>
+              <div class="rating">
+                <i class="fa fa-star select"></i>
+                <i class="fa fa-star select"></i>
+                <i class="fa fa-star select"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+              </div>
+            </div>
+            <div class="col-lg-4 bounty">
+              <p>25</p>
+              <p>Points</p>
+            </div><!-- end bounty -->
+        </div><!-- end row -->
+        </div><!-- end post -->
+
+        <div class="post">
+          <div class="row">
+            <div class="col-lg-2">
+              <img class="avatar" src="http://placehold.it/100x100" />
+            </div>
+            <div class="col-lg-6">
+              <h1>OIL CHANGE <span class="date">05.03.14</span></h1>
+              <p class="task">"I want to learn how to change my car's oil!"</p>
+              <p class="poster">Submitted by: <span>Justin Boh</span></p>
+              <div class="rating">
+                <i class="fa fa-star select"></i>
+                <i class="fa fa-star select"></i>
+                <i class="fa fa-star select"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+              </div>
+            </div>
+            <div class="col-lg-4 bounty">
+              <p>25</p>
+              <p>Points</p>
+            </div><!-- end bounty -->
+          </div><!-- end row -->
+        </div><!-- end post -->
+      </div><!-- end feed -->
     </div><!-- end row -->
   </div><!-- end container -->
 

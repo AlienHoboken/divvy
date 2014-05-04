@@ -44,7 +44,6 @@ app.use(session({
   }),
   secret: 'doIDareToEatAPeach'
 }));
-app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser());
 app.use(logger());
