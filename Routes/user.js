@@ -15,9 +15,25 @@ module.exports = function(db){
 			});
 		},
 		account : function(req, res) {
-			if(req.session.user) {
-				var thePosts = exports.getPostsByPoster(req.session.user);
-				res.render('account', {user: req.session.user, posts: thePosts});
+			var user,
+				matches = /account\/(\w)+/.exec(req.url);
+			if( matches && matches[1] ){
+				// console.log(matches[1]);
+				db.User.find({username: req.body.username}, function (err, theUser) {
+					if (err)  console.log(err) ;
+					if(!theUser) { //no user with this name
+						user = req.session.user;
+					} else {
+						user = theUser;
+					}
+				});	
+			} else {
+				user = req.session.user;
+			}
+
+			if(user) {
+				var thePosts = this.getPostsByPoster(user);
+				res.render('account', {user: user, posts: thePosts});
 			} else {
 				res.redirect('/');
 			}

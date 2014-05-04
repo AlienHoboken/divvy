@@ -64,6 +64,7 @@ if ('development' == env) {
 
 app.get('/', user.home);
 app.get('/account', user.account);
+// app.get('/account/:username', user.account);
 app.get('/api/getposts', api.getposts);
 app.get('/user', user.snippet);
 app.get('/listing/:id', posting.post);

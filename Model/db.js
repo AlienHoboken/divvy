@@ -130,7 +130,7 @@ exports.getUser = function(uname, callback) {
 
 exports.updateUser = function(user, skills, interests, callback) {
 	console.log(skills);
-	var newUser = new User({
+	var newUser = {
 		_id: user._id,
 //		username: user.username,
 		name: user.name,
@@ -143,7 +143,7 @@ exports.updateUser = function(user, skills, interests, callback) {
 			state: user.state,
 			zip: user.zip
 		}
-	});
+	};
 
 	User.findOneAndUpdate({username: user.username}, newUser, function(err, updateUser){
 		if(err) {
@@ -194,7 +194,7 @@ exports.addPost = function(post, user, callback) {
 };
 
 exports.updatePost = function(post, user, callback) {
-	var newPost = new Post({
+	var newPost = {
 		date: Date.now(),
 		bounty: post.bounty,
 		title: post.title,
@@ -209,7 +209,7 @@ exports.updatePost = function(post, user, callback) {
 			state: user.state,
 			zip: user.zip
 		}
-	});
+	};
 
 	User.findOneAndUpdate({_id: post._id}, newPost, function(err, updatedPost){
 		if(err) {
