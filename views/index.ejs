@@ -65,11 +65,10 @@
 
         <div id="new-post" style="display:none;">
           <form id="postform">
-            <input type="text" name="title" placeholder="SKILL" />
-            <input type="text" name="points" placeholder="POINTS" />
-            <textarea name="description" placeholder="DESCRIPTION"></textarea>
-            <input type="text" name="location" placeholder="LOCATION" />
-            <input type="submit" value="ADD">
+            <input id="postTitle" type="text" name="title" placeholder="SKILL" />
+            <input id="postPoints" type="text" name="points" placeholder="POINTS" />
+            <textarea id="postTask" name="description" placeholder="DESCRIPTION"></textarea>
+            <input id="new-post-submit" type="button" value="ADD">
           </form>
         </div>
 
@@ -79,6 +78,7 @@
           <a class="btn" data-q="alphabetical">ABC</a>
         </div>
 
+        <div id="posts">
         <% for (var i = 0; i < posts.length; i++) { %>
         <div class="post">
           <div class="row">
@@ -97,12 +97,15 @@
           </div><!-- end row -->
         </div><!-- end post -->
         <% } %>
+        </div>
 
       </div><!-- end feed -->
     </div><!-- end row -->
   </div><!-- end container -->
 
+  <script>var user = JSON.parse(<%= user.passwordHash = ""; JSON.stringify(user); %>);</script>
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

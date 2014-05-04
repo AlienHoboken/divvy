@@ -34,7 +34,7 @@ var postSchema = mongoose.Schema({
 	bounty: Number,
 	title: String,
 	task: String,
-	_poster: Number,
+	_poster: String,
 	skills: [Number],
 	location: {
 		city: String,
@@ -179,7 +179,7 @@ exports.addPost = function(post, user, callback) {
 		bounty: post.bounty,
 		title: post.title,
 		task: post.task,
-		_poster: user._id,
+		_poster: user.username,
 		skills: post.skills,
 		location: {
 			city: user.city,
