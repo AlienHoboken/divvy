@@ -14,7 +14,7 @@ exports.getposts = function (req, res){
 
 };
 
-exports.newpost = function(req, res) {
+exports.newpost = function(req, res, db) {
 	//get parameters from post
 
     //send them back to home
@@ -24,7 +24,7 @@ exports.newpost = function(req, res) {
     //update counts for skills
 };
 
-exports.signup = function(req, res) {
+exports.signup = function(req, res, db) {
 	var username = req.body.user.username;
 	var password = req.body.user.password;
 	var email = req.body.user.email;
@@ -35,7 +35,7 @@ exports.signup = function(req, res) {
 // return new content
 };
 
-exports.login = function(req, res) {
+exports.login = function(req, res, db) {
 	var username = req.body.user.username;
 	var password = req.body.user.password;
 
