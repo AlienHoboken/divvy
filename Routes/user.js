@@ -13,6 +13,13 @@ module.exports = function(db){
 		getposts : function(req, res) {
 		},
 		newpost : function(req, res) {
+			db.addPost({bounty:req.body.bounty, task:req.body.task, title:req.body.title, skills:req.body.bounty.skills.split(',')}, user, function(err, post) {
+				if(!err) {
+					res.redirect('/');
+				} else {
+					res.send('Error posting.');
+				}
+			});
 		},
 		signup : function(req, res) {
 			var uname = req.body.username;
