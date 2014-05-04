@@ -100,6 +100,7 @@ exports.usernameTaken = function(uname) {
 
 exports.addUser = function(body, callback){
 	var passwd;
+	console.log("adding user");
 	this.cryptPassword(body.password, function(err, hash) {
 		if(err === null) {
 			passwd = hash;
@@ -132,6 +133,8 @@ exports.addUser = function(body, callback){
 			console.log("new user: " + newUser);
 			callback(null, newUser);
 		});
+	} else {
+		console.log("No new user");
 	}
 };
 
