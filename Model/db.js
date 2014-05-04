@@ -168,14 +168,10 @@ exports.addPost = function(post, callback) {
 		bounty: post.bounty,
 		title: post.title,
 		task: post.task,
-<<<<<<< HEAD
-		_poster: post.username,
-=======
 		_poster: user.username,
 		link: post.link,
 		ifCollected: post.ifCollected,
 		interested: [],
->>>>>>> 23b69de614eebd25137691fb37c04621b6d7a6e0
 		skills: post.skills,
 		location: {
 			city: post.city,
