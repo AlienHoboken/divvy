@@ -1,6 +1,7 @@
 var mongoose = require('mongoose'),
-	db = mongoose.connection,
-	credential = require('credential');
+	db = mongoose.connection;
+
+var credential = require('credential');
 
 // Connect to Mongo
 var uristring = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/divvy';
@@ -17,7 +18,8 @@ var userSchema = mongoose.Schema({
 	username: String,
 	name: String,
 	email: String,
-	password: String,
+	passwordField: String,
+	saltValue: String,
 	points: Number,
 	skills: [String],
 	interest: [String],
@@ -29,7 +31,7 @@ var userSchema = mongoose.Schema({
 });
 
 var postSchema = mongoose.Schema({
-	data: Date,
+	date: Date,
 	bounty: Number,
 	title: String,
 	task: String,
@@ -72,33 +74,49 @@ User = mongoose.model('User', userSchema);
 Post = mongoose.model('Post', postSchema);
 Skill = mongoose.model('Skill', skillSchema);
 
-exports.addUser = function(body, callback) {
-	console.log("adding user");
-	console.log("adding user2");
-	
-	var newUser = new User({
-		username: body.username,
-		name: "",
-		email: body.email,
-		points: 0,
-		password: body.password,
-		skills: [],
-		interest: [],
-		location: {
-			city: "",
-			state: "",
-			zip: ""
+
+exports.usernameTaken = function(uname) {
+	User.find({username: uname}, function (err, users) {
+    	if (err) { console.log(err) ;}
+
+        if(!users) { //no user with this name
+        	return false;
+		} else {
+			return true;
 		}
 	});
-	console.log("made object");
+};
 
-	newUser.save(function(err, newUser){
-		if(err) {
-			console.log(err);
-			return callback(err);
+exports.addUser = function(body, callback) {
+	credential.hash(body.password, function(err, hash) {
+		if(err) { console.log(err); return; }
+		hash = JSON.parse(hash);
+	    if(!exports.usernameTaken(body.username)) { //no user with this name
+			var newUser = new User({
+			username: body.username,
+			name: "",
+			email: body.email,
+			passwordField: hash.hash,
+			saltValue: hash.salt,
+			points: 0,
+			skills: [],
+			interest: [],
+			location: {
+				city: "",
+				state: "",
+				zip: ""
+			}
+			});
+    
+			newUser.save(function(err, newUser){
+				if(err) {
+					console.log(err);
+					return callback(err);
+				}
+				console.log("new user: " + newUser);
+				callback(null, newUser);
+			});
 		}
-		console.log("new user: " + newUser);
-		callback(null, newUser);
 	});
 };
 
@@ -148,7 +166,7 @@ exports.deleteUser = function(body, callback) {
 
 exports.addPost = function(post, user, callback) {
 	var newPost = new Post({
-		data: post.data,
+		date: post.data,
 		bounty: post.bounty,
 		title: post.title,
 		task: post.task,
