@@ -18,7 +18,8 @@ var express = require('express'),
 	passport = require('passport'),
 	LocalStrategy = require('passport-local').Strategy,
 	bodyParser = require('body-parser'),
-	auth = require('./Model/auth')(passport, LocalStrategy);
+	auth = require('./Model/auth')(passport, LocalStrategy),
+  ejs = require('ejs');
 
 //build redis + trends
 var lastTrendRebuild = Date.now();
@@ -41,6 +42,7 @@ app.use(session({
   }),
   secret: 'doIDareToEatAPeach'
 }));
+app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser());
 app.use(logger());
