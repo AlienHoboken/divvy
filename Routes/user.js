@@ -1,16 +1,16 @@
-exports.home = function (req, res){
+exports.home = function(req, res, db) {
 	res.render('index');
 };
 
-exports.account = function (req, res){
+exports.account = function(req, res, db) {
 	res.render('account');
 };
 
-exports.snippet = function (req, res){
+exports.snippet = function(req, res, db) {
 
 };
 
-exports.getposts = function (req, res){
+exports.getposts = function(req, res, db) {
 
 };
 
