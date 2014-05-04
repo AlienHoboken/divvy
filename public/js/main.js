@@ -74,10 +74,9 @@ $(document).ready(function() {
     $(this).addClass('selected');
   });
 
-/*  $('#trending-button').click(function() {
-    $.get('/api/globalposts', function(data) {
-	alert(data);
+  $('#trending-button').click(function() {
+    $.get('api/globaltrending', function(data) {
+      console.log(data);
     });
   });
-*/
 });
