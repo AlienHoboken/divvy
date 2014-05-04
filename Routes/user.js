@@ -29,14 +29,14 @@ exports.signup = function(db) {
 	var uname = req.body.username;
 	var passwd = req.body.password;
 	var em = req.body.email;
-	db.addUser({username: uname, email: em, password: passwd}, function(err, user){
+	db.addUser({username: uname, email: em, password: passwd});/*, function(err, user){
 		if(err == null) {
 			//do something with user variable
 			res.redirect('/account');
 		} else {
 			res.redirect('/');
 		}
-	});
+	});*/
 // add new user
 // log new user in
 // return new content
