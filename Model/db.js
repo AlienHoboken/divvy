@@ -81,11 +81,11 @@ exports.usernameTaken = function(uname) {
 
 exports.addUser = function(body, callback) {
 	var passwd;
-	console.log("adding user");
+	console.log("adding user");/*
 	credential.hash(body.password, function(err, hash) {
 		if(err) { console.log(err); return; }
 		passwd = JSON.parse(hash);
-	});
+	});*/
 /*		console.log("Checking username for password " + "hash");
 
 //	    if(exports.usernameTaken(body.username)) {
@@ -125,9 +125,9 @@ console.log(passwd);
     if(!this.usernameTaken(body.username)) { //no user with this name
 	var newUser = new User({
 		username: body.username,
-		password: body.password,
 		name: "",
 		email: body.email,
+		password: body.password,
 		points: 0,
 		skills: [],
 		interest: [],
