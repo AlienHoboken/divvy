@@ -9,9 +9,9 @@ var posts = {};
 
   <title>Account</title>
 
-  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/bootstrap.min.css" />
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
-  <link rel="stylesheet" href="css/styles.css" type="text/css" />
+  <link rel="stylesheet" href="/css/styles.css" type="text/css" />
 </head>
 <body>
     <div class="container">
@@ -25,6 +25,9 @@ var posts = {};
       </div><!-- end col-lg-2 -->
 
       <div class="col-lg-8">
+
+        <% var urls = window.location.split('/'); if (urls[1] == 'me') { %>
+
         <form role="form" id="edit-user-form" action="/update" method="POST">
 
           <input type="text" name="name" placeholder="Name" value="<%= user.name || '' %>" />
@@ -46,6 +49,12 @@ var posts = {};
           <input class="btn btn-primary" type="submit" value="Submit" />
 
         </form>
+
+        <% } else { %>
+
+        Don't touch!
+
+        <% } %>
 
         <div class="filter-group">
           <a class="btn selected" data-q="local">COLLECTED</a>
@@ -91,9 +100,9 @@ var posts = {};
   </script>
 
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-  <script src="js/bootstrap.min.js" type="text/javascript"></script>
-  <script src="js/bootstrap-multiselect.js" type="text/javascript"></script>
-  <script type="text/javascript" src="js/account.js"></script>
+  <script src="/js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="/js/bootstrap-multiselect.js" type="text/javascript"></script>
+  <script type="text/javascript" src="/js/account.js"></script>
   <script>
     $(document).ready(function() {
       $('.multiselect').multiselect();

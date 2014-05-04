@@ -4,7 +4,7 @@ $(document).ready(function() {
   var socket = io.connect(host);
   socket.on('postmade', function(post) {
 	post = JSON.parse(post);
-        $('#posts').prepend('<div class="post">' + 
+        $('#posts').prepend('<div class="post">' +
           '<div class="row">' +
             '<div class="col-lg-2">' +
               '<img class="avatar" src="http://placehold.it/100x100" />' +
@@ -39,7 +39,7 @@ $(document).ready(function() {
     $("#postSkills").val("");
     $('#new-post').slideToggle();
   });
-  
+
   // toggle new post form
   $('#new-post-toggle').click(function() {
     $('#new-post').slideToggle({ duration: 750 });
@@ -69,8 +69,6 @@ $(document).ready(function() {
 
   // change filter button
   $('.filter-group a').click(function() {
-
-
     $('.filter-group a').removeClass('selected');
     $(this).addClass('selected');
   });
