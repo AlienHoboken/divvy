@@ -1,26 +1,6 @@
 var mongoose = require('mongoose'),
 	db = mongoose.connection,
-	bcrypt = require('bcrypt');
-
-exports.cryptPassword = function(password, callback) {
-   bcrypt.genSalt(10, function(err, salt) {
-    if (err) 
-      return callback(err);
-
-    bcrypt.hash(password, salt, function(err, hash) {
-      return callback(err, hash);
-    });
-
-  });
-};
-
-exports.comparePassword = function(password, userPassword, callback) {
-   bcrypt.compare(password, userPassword, function(err, isPasswordMatch) {
-      if (err) 
-        return callback(err);
-      return callback(null, isPasswordMatch);
-   });
-};
+	credential = require('credential');
 
 // Connect to Mongo
 var uristring = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/divvy';
@@ -104,16 +84,9 @@ exports.usernameTaken = function(uname) {
 exports.addUser = function(body, callback){
 	var passwd;
 	console.log("adding user");
-	this.cryptPassword(body.password, function(err, hash) {
-		if(err == null || (typeof err == undefined)) {
-			console.log("Password passed");
-			passwd = hash;
-			console.log("Password passed2");
-		} else {
-			console.log("Password failed");
-			console.log(err);
-			return callback(err);
-		}
+	credential.hash(body.password, function(err, hash) {
+		if(err) { console.log err; return; }
+		passwd = hash;
 	});
 	console.log("Checking username");
     if(!this.usernameTaken(body.username)) { //no user with this name
