@@ -124,20 +124,17 @@ exports.getUser = function(uname, callback) {
 
 exports.updateUser = function(user, skills, interests, callback) {
 	console.log(skills);
-	var newUser = new User({
-		_id: user._id,
-//		username: user.username,
+	var newUser = {
 		name: user.name,
 		email: user.email,
-//		points: user.points,
-		skills: skills,
-		interest: interests,
+		skills: (skills) ? skills : [],
+		interest: (interests) ? interests : [],
 		location: {
 			city: user.city,
 			state: user.state,
 			zip: user.zip
 		}
-	});
+	};
 
 	User.findOneAndUpdate({username: user.username}, newUser, function(err, updateUser){
 		if(err) {
@@ -159,18 +156,18 @@ exports.deleteUser = function(body, callback) {
 	});
 };
 
-exports.addPost = function(post, user, callback) {
+exports.addPost = function(post, callback) {
 	var newPost = new Post({
 		date: Date.now(),
 		bounty: post.bounty,
 		title: post.title,
 		task: post.task,
-		_poster: user.username,
+		_poster: post.username,
 		skills: post.skills,
 		location: {
-			city: user.city,
-			state: user.state,
-			zip: user.zip
+			city: post.city,
+			state: post.state,
+			zip: post.zip
 		}
 	});
 
@@ -232,17 +229,17 @@ exports.removeSkill = function(skill, callback){
 };
 
 exports.updateSkill = function(skill, callback) {
-	newSkill = new Skill({
+	newSkill = {
 		name: skill,
 		trend_factor: skill.trend_factor
-	});
+	};
 	Skill.findOneAndUpdate({name: skill.name}, newSkill, function(err, updateSkill){
 		if(err) {
 			console.log(err);
-//			return callback(err);
+			return callback(err);
 		}
 		console.log("updated skill: " + updateSkill);
-//		callback(null, updateSkill);
+		callback(null, updateSkill);
 	});
 };
 

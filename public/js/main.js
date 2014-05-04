@@ -3,7 +3,7 @@ $(document).ready(function() {
   var host = "http://54.86.63.60:3000";
   var socket = io.connect(host);
   socket.on('postmade', function(post) {
-alert("New post: " + post);
+	post = JSON.parse(post);
         $('#posts').prepend('<div class="post">' + 
           '<div class="row">' +
             '<div class="col-lg-2">' +
@@ -12,7 +12,7 @@ alert("New post: " + post);
             '<div class="col-lg-6">' +
               '<h1>' + post.title + ' <span class="date">' + post.date + '</span></h1>' +
               '<p class="task">"' + post.task + '"</p>' +
-              '<p class="poster">Submitted by: <span>' + post.poster + '</span></p>' +
+              '<p class="poster">Submitted by: <span>' + post.username + '</span></p>' +
             '</div>' +
             '<div class="col-lg-4 bounty">' +
               '<p>' + post.bounty + '</p>' +
@@ -29,11 +29,15 @@ alert("New post: " + post);
     newPost.title = $("#postTitle").val();
     newPost.skills = $("#postSkills").val();
     newPost.username = user.username;
-alert(JSON.stringify(user));
     newPost.city = user.location.city;
     newPost.state = user.location.state;
     newPost.zip = user.location.zip;
     socket.emit('newpost', JSON.stringify(newPost));
+    $("#postPoints").val("");
+    $("#postTask").val("");
+    $("#postTitle").val("");
+    $("#postSkills").val("");
+    $('#new-post').slideToggle();
   });
   
   // toggle new post form

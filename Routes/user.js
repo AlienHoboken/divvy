@@ -35,7 +35,7 @@ module.exports = function(db){
 		getposts : function(req, res) {
 		},
 		newpost : function(req, res) {
-			db.addPost({bounty:req.body.bounty, task:req.body.task, title:req.body.title, skills:req.body.bounty.skills.split(',')}, req.session.user, function(err, post) {
+			db.addPost({bounty:req.body.bounty, task:req.body.task, title:req.body.title, skills:req.body.skills}, req.session.user, function(err, post) {
 				if(!err) {
 					res.redirect('/');
 				} else {
@@ -52,7 +52,7 @@ module.exports = function(db){
 				req.session.user.zip = req.body.zip;
 				req.session.user.skills = req.body.skills;
 				req.session.user.interest = req.body.interests;
-				db.updateUser(req.user, req.body.skills, req.body.interests, function(err, newUser){
+				db.updateUser(req.session.user, req.body.skills, req.body.interests, function(err, newUser){
 					res.redirect('/');
 				});
 			}

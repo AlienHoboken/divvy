@@ -79,15 +79,16 @@ io.sockets.on('connection', function(socket) {
 	socket.on('newpost', function(data){
 		var newPost = JSON.parse(data);
 		console.log("New post: " + data);
-		db.addPost({bounty:newPost.bounty, task:newPost.task, title:newPost.title, skills:newPost.skills.split(',')}, {username: newPost.username, city: newPost.city, state: newPost.state, zip: newPost.zip}, function(err, post) {
+		db.addPost({bounty:newPost.bounty, task:newPost.task, title:newPost.title, skills:newPost.skills, username: newPost.username, city: newPost.city, state: newPost.state, zip: newPost.zip}, function(err, post) {
 			if(!err) {
 				console.log("Broadcasting new post!");
-//				socket.broadcast.emit('postmade', post);
 			} else {
 				console.log("Failed to add post");
 				//socket.emit('posterror', err);
 			}
 		});
+		newPost.date = Date.now();
+		socket.broadcast.emit('postmade', JSON.stringify(newPost));
 	});
 });
 
