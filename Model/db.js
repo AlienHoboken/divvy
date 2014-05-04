@@ -93,7 +93,6 @@ exports.addUser = function(body, callback) {
 		console.log("Checking username for password " + hash);
 
 	    if(exports.usernameTaken(body.username)) {
-	    	if(!taken) {
 	    	console.log("adding user2" + hash);
 	    	hash = JSON.parse(hash);
 
@@ -122,7 +121,6 @@ exports.addUser = function(body, callback) {
 				console.log("new user: " + madeUser);
 				//callback(null, newUser);
 			});
-			}
 	    } //no user with this name
 	});
 };
