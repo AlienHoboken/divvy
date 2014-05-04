@@ -17,9 +17,9 @@ weekday[6] = "Saturday";
 
   <title>Dashboard</title>
 
-  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/bootstrap.min.css" />
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
-  <link rel="stylesheet" href="css/styles.css" type="text/css" />
+  <link rel="stylesheet" href="/css/styles.css" type="text/css" />
 </head>
 <body>
   <div class="container">
@@ -89,7 +89,6 @@ weekday[6] = "Saturday";
         <div class="filter-group">
           <a class="btn selected" data-q="local">LOCAL</a>
           <a class="btn" data-q="releveant">RELEVANT</a>
-          <a class="btn" data-q="alphabetical">ABC</a>
         </div>
 
         <div id="posts">
@@ -108,6 +107,7 @@ weekday[6] = "Saturday";
             <div class="col-lg-4 bounty">
               <p><%= posts[i].bounty %></p>
               <p>Points</p>
+              <p><button id="join-button" class="btn">JOIN</button>
             </div><!-- end bounty -->
 	    </a>
           </div><!-- end row -->
@@ -127,14 +127,41 @@ weekday[6] = "Saturday";
     var user_interests = [];
   </script>
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-  <script src="js/bootstrap.min.js" type="text/javascript"></script>
-  <script src="js/bootstrap-multiselect.js" type="text/javascript"></script>
+  <script src="/js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="/js/bootstrap-multiselect.js" type="text/javascript"></script>
   <script src="/socket.io/socket.io.js"></script>
-  <script type="text/javascript" src="js/main.js"></script>
-  <script type="text/javascript" src="js/account.js"></script>
+  <script type="text/javascript" src="/js/main.js"></script>
+  <script type="text/javascript" src="/js/account.js"></script>
   <script>
     $(document).ready(function() {
       $('.multiselect').multiselect();
+    });
+  </script>
+  <script>
+    $('#join-button').click(function() {
+      var that = $(this),
+          bounty = that.parent().parent().children(':first').text(),
+          title = that.parent().parent().prev().children(':first').text(),
+          task = that.parent().parent().prev().children('.task').text(),
+          link = '',
+          ifCollected = false,
+          skills = 'none';
+
+      // 'subscribe' user to post
+      var data = {
+        link: link,
+        ifCollected: ifCollected,
+        task: task,
+        title: title,
+        bounty: bounty,
+        skills: skills
+      };
+
+      console.log(data);
+
+      $.post('/update_post', data, function(data) {
+        console.log(data);
+      });
     });
   </script>
 </body>
