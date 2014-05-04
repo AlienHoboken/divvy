@@ -68,7 +68,7 @@ app.get('/account', user.account);
 app.get('/api/getposts', api.getposts);
 
 app.get('/user', user.snippet);
-app.get('/listing',posting.post);
+app.get('/listing/:id', posting.post);
 
 app.post('/update', user.update);
 
@@ -87,7 +87,7 @@ io.sockets.on('connection', function(socket) {
 			} else {
 				socket.emit('posterror', err);
 			}
-		});		
+		});
 	});
 });
 
