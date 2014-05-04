@@ -155,7 +155,7 @@ exports.addPost = function(post, user, callback) {
 		bounty: post.bounty,
 		title: post.title,
 		task: post.task,
-		_poster: user.id,
+		_poster: user._id,
 		skills: post.skills,
 		location: {
 			city: user.city,
@@ -181,7 +181,7 @@ exports.getPosts = function() {
 };
 
 exports.removePost = function(post, callback){
-	Post.findByIdAndRemove(post.id, function(err, post){
+	Post.findByIdAndRemove(post._id, function(err, post){
 		if(err) {
 			console.log(err);
 //			return callback(err);
