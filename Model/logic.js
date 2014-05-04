@@ -15,6 +15,8 @@ exports.localPosts = function(user, posts) {
 */
 exports.relevantPosts = function(user, posts) {
 	posts = this.localPosts(user, posts);
+	if(!user.interest)
+		return posts;
 	for(var i = 0; i < posts.length; i++) {
 		var interest_count = 0;
 		for(var j = 0; j < posts[i].skills.length; j++) {

@@ -123,12 +123,13 @@ exports.getUser = function(uname, callback) {
 };
 
 exports.updateUser = function(user, skills, interests, callback) {
-	console.log(user);
+	console.log(skills);
 	var newUser = new User({
-		username: user.username,
+		_id: user._id,
+//		username: user.username,
 		name: user.name,
 		email: user.email,
-		points: user.points,
+//		points: user.points,
 		skills: skills,
 		interest: interests,
 		location: {
@@ -140,11 +141,11 @@ exports.updateUser = function(user, skills, interests, callback) {
 
 	User.findOneAndUpdate({username: user.username}, newUser, function(err, updateUser){
 		if(err) {
-			console.log(err);
+			console.log("err: " + err);
 //			return callback(err);
 		}
 		console.log("updated user: " + updateUser);
-		if(callback) return callback();
+		return callback(null, updateUser);
 	});
 };
 
