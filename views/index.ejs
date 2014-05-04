@@ -24,10 +24,17 @@
       <div class="col-lg-2">
         <header>
           <div id="logo">
-            <img src="images/logo.png" alt="Divvy Logo">
+            <a href="/"><img src="images/logo.png" alt="Divvy Logo"></a>
           </div>
         </header><!-- header -->
 
+        <% if (user) { %>
+        <div id="user-info">
+          <p>JUSTIN BOH</p>
+          <a class="btn btn-primary">MY POSTS</a> <a class="btn btn-primary"><i class="fa fa-pencil fa-lg"></i></a> <a class="btn btn-primary" href="/logout"><i class="fa fa-arrow-circle-o-right fa-lg"></i></a>
+        </div>
+
+        <% } else { %>
         <div class="user-forms">
           <button id="sign-up-toggle" class="btn btn-primary">SIGN UP</button>
           <button id="sign-in-toggle" class="btn btn-primary">LOG IN</button>
@@ -51,10 +58,7 @@
           </form>
         </div>
 
-        <div id="user-info">
-          <p>JUSTIN BOH</p>
-          <a class="btn btn-primary">MY POSTS</a> <a class="btn btn-primary"><i class="fa fa-pencil fa-lg"></i></a> <a class="btn btn-primary"><i class="fa fa-arrow-circle-o-right fa-lg"></i></a>
-        </div>
+        <% } %>
       </div><!-- end col-lg-2 -->
 
       <div class="col-lg-8 feed">
@@ -79,9 +83,9 @@
         </div>
 
         <div class="filter-group">
-          <a class="btn selected">LOCAL</a>
-          <a class="btn">RELEVANT</a>
-          <a class="btn">ABC</a>
+          <a class="btn selected" data-q="local">LOCAL</a>
+          <a class="btn" data-q="releveant">RELEVANT</a>
+          <a class="btn" data-q="alphabetical">ABC</a>
         </div>
 
         <% for (var i = 0; i < posts.length; i++) { %>
