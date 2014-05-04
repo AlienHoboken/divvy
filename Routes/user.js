@@ -40,7 +40,7 @@ exports.signup = function(db) {
 // add new user
 // log new user in
 // return new content
-	}
+	};
 };
 
 exports.login = function(req, res, db) {
