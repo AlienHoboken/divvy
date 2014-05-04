@@ -79,7 +79,8 @@ app.post('/signup', user.signup);
 
 io.sockets.on('connection', function(socket) {
 	io.on('newpost', function(newPost){
-		db.addPost({bounty:newPost.bounty, task:newPost.task, title:newPost.title, skills:newPost.skills.split(',')}, {_id: newPost.userid, city: newPost.city, state: newPost.state, zip: newPost.zip}, function(err, post) {
+		console.log("New post: " + newPost);
+		db.addPost({bounty:newPost.bounty, task:newPost.task, title:newPost.title, skills:newPost.skills.split(',')}, {username: newPost.username, city: newPost.city, state: newPost.state, zip: newPost.zip}, function(err, post) {
 			if(!err) {
 				socket.broadcast.emit('postmade', post);
 			} else {
