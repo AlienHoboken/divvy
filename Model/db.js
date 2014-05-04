@@ -1,5 +1,5 @@
 var mongoose = require('mongoose'),
-var bcrypt = require('bcrypt');
+	bcrypt = require('bcrypt');
 
 exports.cryptPassword = function(password, callback) {
    bcrypt.genSalt(10, function(err, salt) {
