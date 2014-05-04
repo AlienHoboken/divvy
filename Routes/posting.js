@@ -16,9 +16,9 @@ console.log("Getting " + id);
     update: function(req,res){
       if(req.session.user){
         var user = req.session.user,
-          post = req.session.post;
-        db.updatePost(post,user,function(){
-
+          post = req.body.post;
+        db.updatePost(post,user,function(err,updated){
+          res.send(updated);
         });
       }
     }

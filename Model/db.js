@@ -214,7 +214,7 @@ exports.updatePost = function(post, user, callback) {
 //			return callback(err);
 		}
 		console.log("updated user: " + updatePost);
-		if(callback) return callback();
+		if(callback) return callback(null, updatedPost);
 	});
 };
 
