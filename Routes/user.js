@@ -34,7 +34,7 @@ exports.signup = function(db) {
 			//do something with user variable
 			res.redirect('/account');
 		} else {
-				res.send('Error registering.');
+			res.redirect('/');
 		}
 	});
 // add new user
