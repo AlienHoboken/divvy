@@ -69,18 +69,20 @@ Skill = mongoose.model('Skill', skillSchema);
 
 exports.usernameTaken = function(uname) {
 	console.log("in usernametaken");
+	var taken = true;
 	User.findOne({username: uname}, function (err, users) {
     	if (err) { console.log(err); }
 
         if(!users) { //no user with this name
         	console.log("free name");
-        	return false;
+        	taken = false;
 		} else {
 			console.log("no free name");
 			console.log(users)
-			return true;
+			taken = true;
 		}
 	});
+	return taken;
 };
 
 exports.addUser = function(body, callback) {
