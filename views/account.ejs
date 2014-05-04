@@ -31,7 +31,12 @@
 
           <input type="text" name="state" placeholder="State" value="<%= user.state %>">
 
-        <div id="skills"></div>
+          <input type="text" name="zip" placeholder="Zip" value="<%= user.zip %>">
+
+        <label for="skills"></label>
+        <select multiple size="7" id="skills" name="skills">
+
+        </select>
 
         <input class="btn btn-primary" type="submit" value="Submit" />
 

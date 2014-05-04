@@ -10,7 +10,7 @@ $(document).ready(function() {
       checked = ' checked="checked" ';
     }
 
-    $('#skills').append('<div class="checkbox"><input type="checkbox" ' + checked + ' value="' + value + '" name="skills" /> ' + value + '</div>');
+    $('#skills').append('<option ' + checked + ' value="' + value + '" name="skills"> ' + value + '</option>');
   });
 
 });
