@@ -114,7 +114,7 @@ exports.addUser = function(body, callback){
 				return callback(err);
 			}
 			console.log("new user: " + newUser);
-			callback(null, newUser);
+			//callback(null, newUser);
 		});
 	} else {
 		console.log("No new user");
