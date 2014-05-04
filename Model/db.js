@@ -94,8 +94,7 @@ exports.addUser = function(body, callback) {
 	    	if(!taken) {
 	    	console.log("adding user2" + hash);
 	    	hash = JSON.parse(hash);
-	    	console.log(typeof hash);
-	    	console.log("hash " + hash["hash"] + hash.hash + hash[0]);
+
 			var newUser = new User({
 			username: body.username,
 			name: "",
@@ -113,12 +112,12 @@ exports.addUser = function(body, callback) {
 			});
 			console.log("made object " + newUser);
     
-			newUser.save(function(err, newUser){
+			newUser.save(function(err, madeUser){
 				if(err) {
 					console.log(err);
 					return callback(err);
 				}
-				console.log("new user: " + newUser);
+				console.log("new user: " + madeUser);
 				//callback(null, newUser);
 			});
 			}
