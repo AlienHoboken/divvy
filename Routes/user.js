@@ -3,18 +3,23 @@ var Logic = require('../Model/logic');
 module.exports = function(db){
 	return {
 		home : function(req, res) {
-			res.render('index', { user: req.user });
-			console.log(req.session);
+			posts = Logic.relevantPosts(req.session.user, db.getPosts());
+			res.render('index', { user: req.session.user, posts: posts });
 		},
 		account : function(req, res) {
-			res.render('account');
+			if(req.session.user) {
+				res.render('account', {user: req.session.user});
+			} else {
+				res.redirect('/');
+			}
+			
 		},
 		snippet : function(req, res) {
 		},
 		getposts : function(req, res) {
 		},
 		newpost : function(req, res) {
-			db.addPost({bounty:req.body.bounty, task:req.body.task, title:req.body.title, skills:req.body.bounty.skills.split(',')}, user, function(err, post) {
+			db.addPost({bounty:req.body.bounty, task:req.body.task, title:req.body.title, skills:req.body.bounty.skills.split(',')}, req.session.user, function(err, post) {
 				if(!err) {
 					res.redirect('/');
 				} else {
@@ -41,8 +46,6 @@ module.exports = function(db){
 		login : function(req, res) {
 			var username = req.body.user.username;
 			var password = req.body.user.password;
-		// login return json of new content
-		console.log( Logic.relevantPosts(req.body.user, db.allPosts() ) );
 		}
 	};
 };
