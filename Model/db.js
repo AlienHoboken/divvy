@@ -106,7 +106,7 @@ exports.addUser = function(body, callback){
 			zip: ""
 		}
 	});
-
+console.log("made object");
     
 		newUser.save(function(err, newUser){
 			if(err) {
