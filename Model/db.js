@@ -103,12 +103,15 @@ exports.addUser = function(body, callback){
 	console.log("adding user");
 	this.cryptPassword(body.password, function(err, hash) {
 		if(err === null) {
+			console.log("Password passed");
 			passwd = hash;
 		} else {
+			console.log("Password failed");
 			return callback(err);
 		}
 	});
     if(!this.usernameTaken(body.username)) { //no user with this name
+    	console.log("adding user2");
 	var newUser = new User({
 		username: body.username,
 		name: "",
