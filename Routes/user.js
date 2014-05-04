@@ -25,9 +25,9 @@ exports.newpost = function(req, res, db) {
 };
 
 exports.signup = function(req, res, db) {
-	var uname = req.body.user.username;
-	var passwd = req.body.user.password;
-	var em = req.body.user.email;
+	var uname = req.body.username;
+	var passwd = req.body.password;
+	var em = req.body.email;
 	db.addUser({username: uname, email: em, password: passwd}, function(err, user){
 		if(err == null) {
 			//do something with user variable
