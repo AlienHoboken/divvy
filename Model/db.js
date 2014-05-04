@@ -13,7 +13,6 @@ db.once('open', function () {
 });
 
 var userSchema = mongoose.Schema({
-	_id: Number,
 	username: String,
 	name: String,
 	email: String,
@@ -33,7 +32,7 @@ var postSchema = mongoose.Schema({
 	bounty: Number,
 	title: String,
 	task: String,
-	_poster: Number,
+	_poster: String,
 	skills: [Number],
 	location: {
 		city: String,
