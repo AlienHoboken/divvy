@@ -86,12 +86,13 @@ exports.addUser = function(body, callback) {
 	console.log("adding user");
 	credential.hash(body.password, function(err, hash) {
 		if(err) { console.log(err); return; }
-		passwd = hash;
+		var passwd = hash;
 	
-		console.log("Checking username");
+		console.log("Checking username for password " + hash);
 	    exports.usernameTaken(body.username, function(taken) {
 	    	if(!taken) {
 	    	console.log("adding user2");
+			
 			var newUser = new User({
 			username: body.username,
 			name: "",
