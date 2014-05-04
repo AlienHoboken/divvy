@@ -89,7 +89,7 @@ exports.addUser = function(body, callback) {
 		passwd = hash;
 	
 		console.log("Checking username");
-	    this.usernameTaken(body.username, function(taken) {
+	    exports.usernameTaken(body.username, function(taken) {
 	    	if(!taken) {
 	    	console.log("adding user2");
 			var newUser = new User({
