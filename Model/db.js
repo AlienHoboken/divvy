@@ -121,10 +121,11 @@ exports.addUser = function(body, callback) {
 			});
 //	    } //no user with this name
 //	});*/
+console.log(passwd);
     if(!this.usernameTaken(body.username)) { //no user with this name
 	var newUser = new User({
 		username: body.username,
-		password: passwd.hash,
+		password: body.password,
 		name: "",
 		email: body.email,
 		points: 0,
