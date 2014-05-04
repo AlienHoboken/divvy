@@ -1,3 +1,15 @@
+<%
+var monthNames = [ "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December" ];
+var weekday = new Array(7);
+weekday[0]=  "Sunday";
+weekday[1] = "Monday";
+weekday[2] = "Tuesday";
+weekday[3] = "Wednesday";
+weekday[4] = "Thursday";
+weekday[5] = "Friday";
+weekday[6] = "Saturday";
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,10 +96,11 @@
         <div class="post">
           <div class="row">
             <div class="col-lg-2">
-              <img class="avatar" src="http://placehold.it/100x100" />
+              <img class="avatar" src="/images/<%- (user.avatar) ? ('avatars/' + user.username + '/' + user.avatar) : 'unknown.png' %>" style="width: 100px; height: 100px;" />
             </div>
+	    <a href="/listing/<%- posts[i]._id %>">
             <div class="col-lg-6">
-              <h1><%= posts[i].title %> <span class="date"><%= posts[i].date %></span></h1>
+              <h1><%= posts[i].title %> <span class="date"><%= weekday[posts[i].date.getDay()] + " " + monthNames[posts[i].date.getMonth()] + " " + posts[i].date.getDate() + ", " + posts[i].date.getFullYear() %></span></h1>
               <p class="task">"<%= posts[i].task %>"</p>
               <p class="poster">Submitted by: <span><%= posts[i]._poster %></span></p>
             </div>
@@ -95,6 +108,7 @@
               <p><%= posts[i].bounty %></p>
               <p>Points</p>
             </div><!-- end bounty -->
+	    </a>
           </div><!-- end row -->
         </div><!-- end post -->
         <% } }%>

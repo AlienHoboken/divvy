@@ -124,7 +124,7 @@ exports.getUser = function(uname, callback) {
 			console.log(err);
 //			return callback(err);
 		}
-		return user;
+		return callback(null, user);
 	});
 };
 
@@ -229,7 +229,7 @@ Post.find( function(err, posts) {
 	});
 };
 
-exports.getPostsByPoster = function(callback) {
+exports.getPostsByPoster = function(user, callback) {
 	var username = user.username;
 	Post.find( {_poster : username}, function(err, posts) {
 		if (!err){ 

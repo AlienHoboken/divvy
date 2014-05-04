@@ -1,114 +1,71 @@
+<%
+var monthNames = [ "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December" ];
+var weekday = new Array(7);
+weekday[0]=  "Sunday";
+weekday[1] = "Monday";
+weekday[2] = "Tuesday";
+weekday[3] = "Wednesday";
+weekday[4] = "Thursday";
+weekday[5] = "Friday";
+weekday[6] = "Saturday";
+%>
 <!DOCTYPE html>
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Dashboard</title>
+  <title><%= profile.username %> on Divvy</title>
 
-  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/bootstrap.min.css" />
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
-  <link rel="stylesheet" href="css/styles.css" type="text/css" />
+  <link rel="stylesheet" href="/css/styles.css" type="text/css" />
 </head>
 <body>
-  <div class="container">
+    <div class="container">
     <div class="row">
       <div class="col-lg-2">
         <header>
           <div id="logo">
-            <a href="/"><img src="images/logo.png" alt="Divvy Logo"></a>
+            <a href="/"><img src="/images/logo.png" alt="Divvy Logo"></a>
           </div>
         </header><!-- header -->
-
-        <% if (user) { %>
-        <div id="user-info">
-          <p><%= user.name || 'New User' %></p>
-          <a class="btn btn-primary">MY POSTS</a> <a class="btn btn-primary" href="/account"><i class="fa fa-pencil fa-lg"></i></a> <a class="btn btn-primary" href="/logout"><i class="fa fa-arrow-circle-o-right fa-lg"></i></a>
-        </div>
-
-        <% } else { %>
-        <div class="user-forms">
-          <button id="sign-up-toggle" class="btn btn-primary">SIGN UP</button>
-          <button id="sign-in-toggle" class="btn btn-primary">LOG IN</button>
-        </div>
-
-        <div id="sign-up" style="display:none;">
-          <form action="/signup" method="POST">
-            <input type="text" name="username" placeholder="Username" />
-            <input type="text" name="email" placeholder="Email" />
-            <input type="password" name="password" placeholder="Password" />
-            <input type="password" name="password_confirmation" placeholder="Confirm Password" />
-            <input type="submit" value="GO" />
-          </form>
-        </div>
-
-        <div id="sign-in" style="display:none;">
-          <form action="/login" method="POST">
-            <input type="text" name="username" placeholder="Username" />
-            <input type="password" name="password" placeholder="Password" />
-            <input type="submit" value="GO" />
-          </form>
-        </div>
-
-        <% } %>
       </div><!-- end col-lg-2 -->
 
-      <div class="col-lg-8 feed">
-        <nav>
-          <div class="searchform">
-            <div id="mainsearch">
-              <input type="text" name="searchbar" placeholder="Search" />
-              <i class="fa fa-search fa-lg"></i>
-              <a class="btn btn-primary" id="new-post-toggle"><i class="fa fa-plus fa-lg"></i></a>
-            </div>
-          </div>
-        </nav>
+      <div class="col-lg-8">
 
-        <div id="new-post" style="display:none;">
-          <form id="postform">
-            <input id="postTitle" type="text" name="title" placeholder="TITLE" />
-            <input id="postSkills" type="text" name="skills" placeholder="SKILL" />
-            <input id="postPoints" type="text" name="points" placeholder="POINTS" />
-            <textarea id="postTask" name="description" placeholder="DESCRIPTION"></textarea>
-            <input id="new-post-submit" type="button" value="ADD">
-          </form>
-        </div>
-
-        <div class="filter-group">
-          <a class="btn selected" data-q="local">LOCAL</a>
-          <a class="btn" data-q="releveant">RELEVANT</a>
-          <a class="btn" data-q="alphabetical">ABC</a>
-        </div>
-
-        <div id="posts">
-        <% if(posts) { for (var i = 0; i < posts.length; i++) { %>
         <div class="post">
           <div class="row">
+            <div class="col-lg-8">
+              <h1><%= profile.name %></h1>
+              <h3 class="task">"<%= profile.username%>"<h3>
+			<br /><br />
+            </div>
             <div class="col-lg-2">
               <img class="avatar" src="http://placehold.it/100x100" />
             </div>
-            <div class="col-lg-6">
-              <h1><%= posts[i].title %> <span class="date"><%= posts[i].date %></span></h1>
-              <p class="task">"<%= posts[i].task %>"</p>
-              <p class="poster">Submitted by: <span><%= posts[i].poster %></span></p>
-            </div>
-            <div class="col-lg-4 bounty">
-              <p><%= posts[i].bounty %></p>
-              <p>Points</p>
-            </div><!-- end bounty -->
+	    <div class="col-lg-12">
+		<h1>Posts:</h1>
+		<table class="profile-posts table table-striped">
+			<% for(var i = 0; i < posts.length; i++) { %>
+			<tr><td><a href="/listing/<%- posts[i]._id %>"><div>
+        <h3><%= posts[i].title %></h3>
+              <span class="task">"<%= posts[i].task %>"</span><br />
+                  <span class="date"><%= weekday[posts[i].date.getDay()] + " " + monthNames[posts[i].date.getMonth()] + " " + posts[i].date.getDate() + ", " + posts[i].date.getFullYear() %></span>
+		</div></a></td></tr>
+<%}%>
+		</table>
+	    </div>
+            <div class = "row">
+	    </div>
           </div><!-- end row -->
         </div><!-- end post -->
-        <% } }%>
-        </div>
 
-      </div><!-- end feed -->
+      </div>
+
     </div><!-- end row -->
   </div><!-- end container -->
 
-  <% if(user) { %>
-  <script>var user = JSON.parse(<%= user.passwordHash = "" %>'<%- JSON.stringify(user) %>');</script>
-  <% } %>
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-  <script src="/socket.io/socket.io.js"></script>
-  <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

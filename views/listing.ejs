@@ -1,12 +1,15 @@
-<% post = {
-  title: 'Testing One Two Three',
-  date: 'May 22 2014',
-  bounty: 25,
-  task: 'Do something for me, bitch! BlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlah',
-  poster: 'Alex Sears',
-  location: { city: 'Cincinnati', state: 'OH', zip: '45243' },
-  skills: ['Automobile']
-} %>
+<%
+var monthNames = [ "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December" ];
+var weekday = new Array(7);
+weekday[0]=  "Sunday";
+weekday[1] = "Monday";
+weekday[2] = "Tuesday";
+weekday[3] = "Wednesday";
+weekday[4] = "Thursday";
+weekday[5] = "Friday";
+weekday[6] = "Saturday";
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,20 +34,24 @@
 
       <div class="col-lg-8">
 
-        <div class="post single-post">
+        <div class="post">
           <div class="row">
             <div class="col-lg-2">
               <img class="avatar" src="http://placehold.it/100x100" />
             </div>
-            <div class="col-lg-6">
-              <h1><%= post.title %> <span class="date"><%= post.date %></span></h1>
-              <p class="task">"<%= post.task %>"</p>
-              <p class="poster">Submitted by: <span><%= post.poster %></span></p>
+            <div class="col-lg-8">
+              <h1><%= post.title %></h1>
+              <h3 class="task">"<%= post.task %>"<h3>
+		  <span class="date"><%= weekday[post.date.getDay()] + " " + monthNames[post.date.getMonth()] + " " + post.date.getDate() + ", " + post.date.getFullYear() %></span>
+			<br /><br />
+              <p class="poster">Submitted by: <a href="/user/<%= post._poster %>"><%= post._poster %></a></span></p>
             </div>
-            <div class="col-lg-4 bounty">
+            <div class="col-lg-2 bounty">
               <p><%= post.bounty %></p>
               <p>Points</p>
             </div><!-- end bounty -->
+            <div class = "row">
+	    </div>
             <div class="interested">
              <% for (var i = 0; i < post.interested; i++) { %>
               <a href="/account/<%= post.interested[i].username %>" title=""><%= post.interested[i].username %></a>

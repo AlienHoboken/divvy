@@ -2,15 +2,16 @@ var Logic = require('../Model/logic');
 
 module.exports = function(db) {
 	return {
-		post : function(req,res) {
-			var id = req.query.id;
-			db.post.findOne({_id: id}, function(err, doc) {
-        if (doc) {
-          res.render('listing', {post: doc});
-        } else {
-          res.redirect('/');
-        }
-      });
+	post : function(req,res) {
+		var id = req.params.id;
+console.log("Getting " + id);
+		db.post.findOne({_id: id}, function(err, doc) {
+        		if (doc) {
+        			  res.render('listing', {post: doc});
+		        } else {
+        			  res.redirect('/');
+        	}
+      		});
     },
     update: function(req,res){
       if(req.session.user){

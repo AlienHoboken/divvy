@@ -33,7 +33,7 @@ module.exports = function(db){
 
 			if(user) {
 				var thePosts = this.getPostsByPoster(user);
-				res.render('account', {user: user, posts: thePosts});
+				res.render('account', {user: req.session.user});
 			} else {
 				res.redirect('/');
 			}
@@ -107,6 +107,22 @@ module.exports = function(db){
 			req.session.destroy();
 			req.logout();
 			res.redirect('/');
+		},
+		profile : function(req,res) {
+			var uname = req.params.username;
+			db.getUser(uname, function(err, user) {
+				if(!err) {
+					db.getPostsByPoster(user, function(err, posts) {
+						if(!err) {
+							res.render('profile', { user: req.session.user, profile: user, posts: posts });
+						} else {
+							res.redirect('/');
+						}
+					});
+				} else {
+					res.redirect('/');
+				}
+			});
 		}
 	};
 };

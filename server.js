@@ -57,14 +57,14 @@ app.use(errorhandler());
 
 var env = process.env.NODE_ENV || 'development';
 if ('development' == env) {
-   app.use(errorhandler({ dumpExceptions: true, showStack: true }));
+	app.use(errorhandler({ dumpExceptions: true, showStack: true }));
 } else {
 	app.use(errorhandler());
 }
 
 app.get('/', user.home);
 app.get('/account', user.account);
-// app.get('/account/:username', user.account);
+app.get('/user/:username', user.profile);
 app.get('/api/getposts', api.getposts);
 app.get('/user', user.snippet);
 app.get('/listing/:id', posting.post);
