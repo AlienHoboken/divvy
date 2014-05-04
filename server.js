@@ -65,9 +65,10 @@ app.get('/', user.home);
 app.get('/account', user.account);
 app.get('/api/getposts', api.getposts);
 
+app.post('/update', user.update);
+
 app.post('/user-snippet', user.snippet);
 app.post('/newpost', user.newpost);
-app.post('/update', user.update);
 app.post('/login', auth.authenticate, user.login);
 app.post('/logout', user.logout);
 app.post('/signup', user.signup);
