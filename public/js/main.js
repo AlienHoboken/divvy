@@ -3,22 +3,22 @@ $(document).ready(function() {
   var host = "http://54.86.63.60:3000";
   var socket = io.connect(host);
   socket.on('postmade', function(post) {
-        $('#posts').prepend('<div class="post">
-          <div class="row">
-            <div class="col-lg-2">
-              <img class="avatar" src="http://placehold.it/100x100" />
-            </div>
-            <div class="col-lg-6">
-              <h1>' + post.title + ' <span class="date">' + post.date + '</span></h1>
-              <p class="task">"' + post.task + '"</p>
-              <p class="poster">Submitted by: <span>' + post.poster + '</span></p>
-            </div>
-            <div class="col-lg-4 bounty">
-              <p>' + post.bounty + '</p>
-              <p>Points</p>
-            </div><!-- end bounty -->
-          </div><!-- end row -->
-        </div><!-- end post -->');
+        $('#posts').prepend('<div class="post">' + 
+          '<div class="row">' +
+            '<div class="col-lg-2">' +
+              '<img class="avatar" src="http://placehold.it/100x100" />' +
+            '</div>' +
+            '<div class="col-lg-6">' +
+              '<h1>' + post.title + ' <span class="date">' + post.date + '</span></h1>' +
+              '<p class="task">"' + post.task + '"</p>' +
+              '<p class="poster">Submitted by: <span>' + post.poster + '</span></p>' +
+            '</div>' +
+            '<div class="col-lg-4 bounty">' +
+              '<p>' + post.bounty + '</p>' +
+              '<p>Points</p>' +
+            '</div><!-- end bounty -->' +
+          '</div><!-- end row -->' +
+        '</div><!-- end post -->');
   });
 
   $('#new-post-submit').click(function() {
@@ -31,6 +31,7 @@ $(document).ready(function() {
     newPost.city = user.location.city;
     newPost.state = user.location.state;
     newPost.zip = user.location.zip;
+alert(newPost);
     socket.emit('newpost', newPost);
   });
   
