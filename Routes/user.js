@@ -4,6 +4,7 @@ module.exports = function(db){
 	return {
 		home : function(req, res) {
 			res.render('index', { user: req.user });
+			console.log(req.session);
 		},
 		account : function(req, res) {
 			res.render('account');
