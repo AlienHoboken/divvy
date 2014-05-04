@@ -5,8 +5,12 @@ $(document).ready(function() {
 
   $.each(skills, function(index, value) {
 
-    $('#skills').append('<div class="checkbox"><input type="checkbox" value="' + value + '" name="skills" /> ' + value + '</div>');
+    var checked = '';
+    if (user_skills.length !== 0 && user_skills.indexOf(value) !== -1) {
+      checked = ' checked="checked" ';
+    }
 
+    $('#skills').append('<div class="checkbox"><input type="checkbox" ' + checked + ' value="' + value + '" name="skills" /> ' + value + '</div>');
   });
 
 });

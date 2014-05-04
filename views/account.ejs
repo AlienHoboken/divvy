@@ -1,3 +1,11 @@
+<% var user = {
+  name: 'Alex Sears',
+  email: 'alexwsears@gmail.com',
+  city: 'Cincinnati',
+  state: 'OH',
+  skills: ['Automotive', 'Music', 'Drinking']
+}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +23,7 @@
       <div class="col-lg-2">
         <header>
           <div id="logo">
-            <img src="images/logo.png" alt="Divvy Logo">
+            <a href="/"><img src="images/logo.png" alt="Divvy Logo"></a>
           </div>
         </header><!-- header -->
       </div><!-- end col-lg-2 -->
@@ -23,13 +31,13 @@
       <div class="col-lg-8">
         <form role="form" id="edit-user-form">
 
-          <input type="text" name="name" placeholder="Name">
+          <input type="text" name="name" placeholder="Name" value="<%= user.name %>" />
 
-          <input type="text" name="email" placeholder="Email">
+          <input type="text" name="email" placeholder="Email" value="<%= user.email %>" />
 
-          <input type="text" name="city" placeholder="City">
+          <input type="text" name="city" placeholder="City" value="<%= user.city %>" />
 
-          <input type="text" name="state" placeholder="State">
+          <input type="text" name="state" placeholder="State" value="<%= user.state %>">
 
         <div id="skills"></div>
 
@@ -40,6 +48,13 @@
 
     </div><!-- end row -->
   </div><!-- end container -->
+
+  <script>
+    var user_skills = [];
+    <% for (var i in user.skills) { %>
+      user_skills.push('<%= user.skills[i] %>');
+    <% } %>
+  </script>
 
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
   <script type="text/javascript" src="js/skills.js"></script>
