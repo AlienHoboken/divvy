@@ -72,7 +72,10 @@ module.exports = function(db){
 				req.session.user.email = req.body.email;
 				req.session.user.city = req.body.city;
 				req.session.user.state = req.body.state;
+				req.session.user.location.city = req.body.city;
+				req.session.user.location.state = req.body.state;
 				req.session.user.zip = req.body.zip;
+				req.session.user.location.zip = req.body.zip;
 				req.session.user.skills = req.body.skills;
 				req.session.user.interest = req.body.interests;
 				db.updateUser(req.session.user, req.body.skills, req.body.interests, function(err, newUser){
@@ -107,16 +110,6 @@ module.exports = function(db){
 			req.session.destroy();
 			req.logout();
 			res.redirect('/');
-		},
-		globalposts : function(req,res){
-                        db.getPosts(function(err, posts) {
-                                if(!err) {
-                                        posts = Logic.globalTrendingPosts(posts);
-                                }
-                                res.send(JSON.stringify(posts));
-				res.end();
-                        });
-	
 		},
 		profile : function(req,res) {
 			var uname = req.params.username;

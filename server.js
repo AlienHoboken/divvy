@@ -68,7 +68,6 @@ app.get('/user/:username', user.profile);
 app.get('/me', user.me);
 //app.get('/user/:username', user.account);
 app.get('/api/getposts', api.getposts);
-app.get('/api/globalposts', user.globalposts);
 app.get('/user', user.snippet);
 app.get('/listing/:id', posting.post);
 app.get('/logout', user.logout);

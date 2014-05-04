@@ -75,8 +75,12 @@ $(document).ready(function() {
   });
 
   $('#trending-button').click(function() {
-    $.get('api/globaltrending', function(data) {
-      console.log(data);
+    alert(0);
+    $.ajax({
+	url: 'api/globalposts',
+	context: document.body
+    }).done( function(data) {
+	alert(1);
     });
   });
 });
