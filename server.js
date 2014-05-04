@@ -10,6 +10,7 @@ var express = require('express'),
 	cookieParser = require('cookie-parser'),
 	session = require('express-session'),
 	RedisStore = require('connect-redis')(session),
+	db = require('./Model/db'),
 	user = require('./Routes/user')(db),
 	api = require('./Routes/api'),
 	redis = require('redis'),
@@ -19,7 +20,6 @@ var express = require('express'),
 	LocalStrategy = require('passport-local').Strategy,
 	bodyParser = require('body-parser'),
 	auth = require('./Model/auth')(passport, LocalStrategy),
-	db = require('./Model/db'),
   ejs = require('ejs');
 
 //build redis + trends
