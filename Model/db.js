@@ -113,7 +113,7 @@ exports.addUser = function(body, callback){
 		name: "",
 		email: body.email,
 		points: 0,
-		password: hash,
+		password: passwd,
 		skills: [],
 		interest: [],
 		location: {
