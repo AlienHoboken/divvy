@@ -107,6 +107,7 @@ exports.addUser = function(body, callback){
 			passwd = hash;
 		} else {
 			console.log("Password failed");
+			console.log(err);
 			return callback(err);
 		}
 	});
