@@ -217,7 +217,7 @@ exports.updatePost = function(post, user, callback) {
 //			return callback(err);
 		}
 		console.log("updated user: " + updatePost);
-		if(callback) return callback();
+		if(callback) return callback(null, updatedPost);
 	});
 };
 
@@ -232,7 +232,7 @@ Post.find( function(err, posts) {
 	});
 };
 
-exports.getPostsByPoster = function(callback) {
+exports.getPostsByPoster = function(user, callback) {
 	var username = user.username;
 	Post.find( {_poster : username}, function(err, posts) {
 		if (!err){ 

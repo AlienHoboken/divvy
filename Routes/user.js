@@ -15,25 +15,23 @@ module.exports = function(db){
 			});
 		},
 		account : function(req, res) {
-			var user,
-				matches = /account\/(\w)+/.exec(req.url);
-			if( matches && matches[1] ){
-				// console.log(matches[1]);
-				db.User.find({username: req.body.username}, function (err, theUser) {
-					if (err)  console.log(err) ;
-					if(!theUser) { //no user with this name
-						user = req.session.user;
-					} else {
-						user = theUser;
-					}
-				});	
-			} else {
-				user = req.session.user;
-			}
+			var user = req.params.username;
 
 			if(user) {
-				var thePosts = this.getPostsByPoster(user);
-				res.render('account', {user: user, posts: thePosts});
+				db.getPostsByPoster(user,function(err,posts){
+					res.render('account', {user: user, posts: posts});
+				});
+			} else {
+				res.redirect('/');
+			}
+		},
+		me : function(req,res){
+			user = req.session.user;
+			
+			if(user) {
+				db.getPostsByPoster(user,function(err,posts){
+					res.render('account', {user: user, posts: posts});
+				});
 			} else {
 				res.redirect('/');
 			}
