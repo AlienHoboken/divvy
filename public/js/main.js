@@ -3,6 +3,7 @@ $(document).ready(function() {
   var host = "http://54.86.63.60:3000";
   var socket = io.connect(host);
   socket.on('postmade', function(post) {
+alert("New post: " + post);
         $('#posts').prepend('<div class="post">' + 
           '<div class="row">' +
             '<div class="col-lg-2">' +
@@ -31,8 +32,7 @@ $(document).ready(function() {
     newPost.city = user.location.city;
     newPost.state = user.location.state;
     newPost.zip = user.location.zip;
-alert(newPost);
-    socket.emit('newpost', newPost);
+    socket.emit('newpost', JSON.stringify(newPost));
   });
   
   // toggle new post form
