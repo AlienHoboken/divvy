@@ -1,6 +1,7 @@
 var express = require('express'),
 	app = express(),
-	http = require('http'),
+	server = require('http').Server(app),
+	io = require('socket.io')(server),
 	path = require('path'),
 	errorhandler = require('errorhandler'),
 	router = express.Router(),
@@ -71,8 +72,10 @@ app.post('/login', auth.authenticate, user.login);
 app.post('/logout', auth.authenticate, user.login);
 app.post('/signup', user.signup);
 
+io.on('newpost', function(socket){
+});
 
-http.createServer(app).listen(app.get('port'), function(){
+server.listen(app.get('port'), function(){
 	console.log('Express server listening on port ' + app.get('port'));
 
     //rebuild trends AFTER response if they are an hour or more stale
