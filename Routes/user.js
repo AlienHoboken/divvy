@@ -1,8 +1,8 @@
-exports.account = function (req, res){
+exports.home = function (req, res){
 
 };
 
-exports.home = function (req, res){
+exports.account = function (req, res){
 
 };
 
@@ -10,19 +10,7 @@ exports.snippet = function (req, res){
 
 };
 
-exports.trending = function (req, res){
-
-};
-
-exports.local = function (req, res){
-
-};
-
-exports.login = function (req, res){
-
-};
-
-exports.signup = function (req, res){
+exports.getposts = function (req, res){
 
 };
 
@@ -37,13 +25,19 @@ exports.newpost = function(req, res) {
 };
 
 exports.signup = function(req, res) {
-	var username = req.param('username');
-	var password = req.param('password');
-	var email = req.param('email');
-	var name = req.param('name');
+	var username = req.body.user.username;
+	var password = req.body.user.password;
+	var email = req.body.user.email;
+	var name = req.body.user.name;
+
+// add new user
+// log new user in
+// return new content
 };
 
 exports.login = function(req, res) {
-	var username = req.param('username');
-	var password = req.param('password');
+	var username = req.body.user.username;
+	var password = req.body.user.password;
+
+// login return json of new content
 };
