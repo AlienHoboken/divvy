@@ -150,7 +150,7 @@ exports.deleteUser = function(body, callback) {
 	});
 };
 
-exports.addPost = function(post, user, callback) 
+exports.addPost = function(post, user, callback) {
 	var newPost = new Post({
 		data: post.data,
 		bounty: post.bounty,
