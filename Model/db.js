@@ -1,4 +1,5 @@
 var mongoose = require('mongoose'),
+	db = mongoose.connection,
 	bcrypt = require('bcrypt');
 
 exports.cryptPassword = function(password, callback) {
