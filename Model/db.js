@@ -85,7 +85,7 @@ exports.addUser = function(body, callback){
 	var passwd;
 	console.log("adding user");
 	credential.hash(body.password, function(err, hash) {
-		if(err) { console.log err; return; }
+		if(err) { console.log(err); return; }
 		passwd = hash;
 	});
 	console.log("Checking username");
