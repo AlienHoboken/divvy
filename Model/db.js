@@ -84,34 +84,33 @@ exports.addUser = function(body, callback) {
 	credential.hash(body.password, function(err, hash) {
 		if(err) { console.log(err); return; }
 		hash = JSON.parse(hash);
-    if(!exports.usernameTaken(body.username)) { //no user with this name
-	var newUser = new User({
-		username: body.username,
-		name: "",
-		email: body.email,
-		passwordField: hash.hash,
-		saltValue: hash.salt,
-		points: 0,
-		skills: [],
-		interest: [],
-		location: {
-			city: "",
-			state: "",
-			zip: ""
+	    if(!exports.usernameTaken(body.username)) { //no user with this name
+			var newUser = new User({
+			username: body.username,
+			name: "",
+			email: body.email,
+			passwordField: hash.hash,
+			saltValue: hash.salt,
+			points: 0,
+			skills: [],
+			interest: [],
+			location: {
+				city: "",
+				state: "",
+				zip: ""
+			}
+			});
+    
+			newUser.save(function(err, newUser){
+				if(err) {
+					console.log(err);
+//					return callback(err);
+				}
+				console.log("new user: " + newUser);
+//				callback(null, newUser);
+			});
 		}
 	});
-
-    
-		newUser.save(function(err, newUser){
-			if(err) {
-				console.log(err);
-//				return callback(err);
-			}
-			console.log("new user: " + newUser);
-//			callback(null, newUser);
-		});
-	}
-});
 };
 
 exports.getUser = function(uname, callback) {
