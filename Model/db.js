@@ -68,7 +68,7 @@ Skill = mongoose.model('Skill', skillSchema);
 
 exports.usernameTaken = function(uname) {
 	User.find({username: uname}, function (err, users) {
-    	if (err) { console.log(err) };)
+    	if (err) { console.log(err) });
 
         if(!users) { //no user with this name
         	return false;
