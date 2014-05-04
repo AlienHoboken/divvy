@@ -37,7 +37,7 @@ module.exports = function(passport, LocalStrategy) {
 				if (err) { return next(err); }
 				if (!user) {
 					console.log('Auth: ' + info.message);
-					if(req.session === undefined) {
+					if(req.session ) {
 						console.log('session is undefined');
 						return res.send('{err: "session is undefined", msg: "' + info.message + '"}');
 					}

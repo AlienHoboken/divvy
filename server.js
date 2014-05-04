@@ -20,7 +20,7 @@ var express = require('express'),
 	LocalStrategy = require('passport-local').Strategy,
 	bodyParser = require('body-parser'),
 	auth = require('./Model/auth')(passport, LocalStrategy),
-  ejs = require('ejs');
+	ejs = require('ejs');
 
 //build redis + trends
 var lastTrendRebuild = Date.now();
@@ -67,10 +67,10 @@ app.get('/api/getposts', api.getposts);
 
 app.post('/user-snippet', user.snippet);
 app.post('/newpost', user.newpost);
+app.post('/update', user.update);
 app.post('/login', auth.authenticate, user.login);
-app.post('/logout', auth.authenticate, user.login);
+app.post('/logout', user.logout);
 app.post('/signup', user.signup);
-
 
 http.createServer(app).listen(app.get('port'), function(){
 	console.log('Express server listening on port ' + app.get('port'));
