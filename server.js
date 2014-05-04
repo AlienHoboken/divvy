@@ -1,18 +1,24 @@
-/**
- * Module dependencies.
- */
 var express = require('express'),
 	app = express(),
 	http = require('http'),
 	path = require('path'),
+	errorhandler = require('errorhandler'),
+	router = express.Router(),
+	logger = require('morgan'),
+	methodOverride = require('method-override'),
 	bodyParser = require('body-parser'),
 	cookieParser = require('cookie-parser'),
-	session = require('session'),
-	redisStore = require('connect-redis')(express),
+	session = require('express-session'),
+	RedisStore = require('connect-redis')(session),
 	user = require('./Routes/user'),
 	api = require('./Routes/api'),
 	redis = require('redis'),
-	logic = require('./Model/logic');
+	logic = require('./Model/logic'),
+	mongoose = require('mongoose'),
+	passport = require('passport'),
+	LocalStrategy = require('passport-local').Strategy,
+	bodyParser = require('body-parser'),
+	auth = require('./Model/auth')(passport, LocalStrategy);
 
 //build redis + trends
 var lastTrendRebuild = Date.now();
@@ -35,17 +41,33 @@ app.use(session({
   }),
   secret: 'doIDareToEatAPeach'
 }));
-
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser());
+app.use(logger());
+app.use(methodOverride());
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(router);
+app.use(errorhandler());
+
+
+var env = process.env.NODE_ENV || 'development';
+if ('development' == env) {
+   app.use(errorhandler({ dumpExceptions: true, showStack: true }));
+} else {
+	app.use(errorhandler());
+}
 
 app.get('/', user.home);
 app.get('/account', user.account);
+app.get('/api/getposts', api.getposts);
+
 app.post('/user-snippet', user.snippet);
 app.post('/newpost', user.newpost);
-app.post('/login', user.login);
+// app.post('/login', user.login);
+app.post('/login', auth.authenticate, user.login);
 app.post('/signup', user.signup);
-app.get('/api/getposts', api.getposts);
+
 
 http.createServer(app).listen(app.get('port'), function(){
 	console.log('Express server listening on port ' + app.get('port'));
