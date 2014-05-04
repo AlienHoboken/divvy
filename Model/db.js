@@ -71,7 +71,7 @@ userSchema.methods.comparePassword = function(candidatePassword, cb) {
 		credential.verify(this.passwordHash, candidatePassword, function(err, isValid) {
  			var msg;
   			if (err) { throw err; }
-  			if(isValid) { 
+  			if(isValid) {
   				console.log('Passwords match!');
   				return cb(null, true);
   			} else {
@@ -116,7 +116,7 @@ exports.addUser = function(body, callback) {
 				zip: ""
 			}
 			});
-    
+
 			newUser.save(function(err, newUser){
 				if(err) {
 					console.log(err);
@@ -200,7 +200,7 @@ exports.addPost = function(post, user, callback) {
 
 exports.getPosts = function() {
 	Post.find({}, function(err, posts) {
-		return users;
+		return posts;
 	});
 };
 
