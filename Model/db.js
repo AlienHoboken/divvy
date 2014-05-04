@@ -93,6 +93,8 @@ exports.addUser = function(body, callback) {
 	    exports.usernameTaken(body.username, function(taken) {
 	    	if(!taken) {
 	    	console.log("adding user2" + hash);
+	    	hash = JSON.parse(hash);
+	    	console.log(typeof hash);
 	    	console.log("hash " + hash["hash"] + hash.hash + hash[0]);
 			var newUser = new User({
 			username: body.username,
