@@ -48,7 +48,7 @@ module.exports = function(db){
 				req.user.city = req.body.city;
 				req.user.state = req.body.state;
 				req.user.zip = req.body.zip;
-				db.updateUser(req.user, req.body.skills, req.body.interests, function(req,res){
+				db.updateUser(req.user, req.body.skills, req.body.interests, function(){
 					res.redirect('/');
 				});
 			}
@@ -78,6 +78,7 @@ module.exports = function(db){
 		},
 		logout : function(req,res){
 			req.session.destroy();
+			req.session.save();
 			req.logout();
 			res.redirect('/');
 		}
