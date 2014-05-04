@@ -123,6 +123,7 @@ exports.getUser = function(uname, callback) {
 };
 
 exports.updateUser = function(user, skills, interests, callback) {
+	console.log(user);
 	var newUser = new User({
 		username: user.username,
 		name: user.name,
@@ -143,6 +144,7 @@ exports.updateUser = function(user, skills, interests, callback) {
 //			return callback(err);
 		}
 		console.log("updated user: " + updateUser);
+		if(callback) return callback();
 	});
 };
 
