@@ -104,10 +104,10 @@ exports.addUser = function(body, callback) {
 			newUser.save(function(err, newUser){
 				if(err) {
 					console.log(err);
-//					return callback(err);
+					return callback(err);
 				}
 				console.log("new user: " + newUser);
-//				callback(null, newUser);
+				callback(null, newUser);
 			});
 		}
 	});
