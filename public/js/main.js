@@ -73,4 +73,10 @@ $(document).ready(function() {
     $(this).addClass('selected');
   });
 
+  $('#trending-button').click(function() {
+    $.get('api/globaltrending', function(data) {
+      console.log(data);
+    })
+  });
+
 });
