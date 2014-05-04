@@ -87,7 +87,6 @@ exports.addUser = function(body, callback) {
 	console.log("adding user");
 	credential.hash(body.password, function(err, hash) {
 		if(err) { console.log(err); return; }
-		var passwd = hash;
 	
 		console.log("Checking username for password " + hash);
 	    exports.usernameTaken(body.username, function(taken) {
@@ -98,8 +97,8 @@ exports.addUser = function(body, callback) {
 			username: body.username,
 			name: "",
 			email: body.email,
-			password: passwd.hash,
-			salt: passwd.hash,
+			password: hash.hash,
+			salt: hash.salt,
 			points: 0,
 			skills: [],
 			interest: [],
