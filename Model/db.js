@@ -92,7 +92,7 @@ exports.addUser = function(body, callback){
 	console.log("Checking username");
     if(!this.usernameTaken(body.username)) { //no user with this name
     	console.log("adding user2");
-	var newUser = new User({
+	/*var newUser = new User({
 		username: body.username,
 		name: "",
 		email: body.email,
@@ -105,7 +105,7 @@ exports.addUser = function(body, callback){
 			state: "",
 			zip: ""
 		}
-	});
+	});*/
 console.log("made object");
     
 		newUser.save(function(err, newUser){
