@@ -25,11 +25,17 @@ exports.newpost = function(req, res, db) {
 };
 
 exports.signup = function(req, res, db) {
-	var username = req.body.user.username;
-	var password = req.body.user.password;
-	var email = req.body.user.email;
-	var name = req.body.user.name;
-
+	var uname = req.body.user.username;
+	var passwd = req.body.user.password;
+	var em = req.body.user.email;
+	db.addUser({username: uname, email: em, password: passwd}, function(err, user){
+		if(err == null) {
+			//do something with user variable
+			res.redirect('/account');
+		} else {
+				res.send('Error registering.');
+		}
+	});
 // add new user
 // log new user in
 // return new content

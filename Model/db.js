@@ -1,5 +1,25 @@
 var mongoose = require('mongoose'),
-	db = mongoose.connection;
+var bcrypt = require('bcrypt');
+
+exports.cryptPassword = function(password, callback) {
+   bcrypt.genSalt(10, function(err, salt) {
+    if (err) 
+      return callback(err);
+
+    bcrypt.hash(password, salt, function(err, hash) {
+      return callback(err, hash);
+    });
+
+  });
+};
+
+exports.comparePassword = function(password, userPassword, callback) {
+   bcrypt.compare(password, userPassword, function(err, isPasswordMatch) {
+      if (err) 
+        return callback(err);
+      return callback(null, isPasswordMatch);
+   });
+};
 
 // Connect to Mongo
 var uristring = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/divvy';
@@ -78,18 +98,27 @@ exports.usernameTaken = function(uname) {
 };
 
 exports.addUser = function(body, callback){
+	var passwd;
+	this.cryptPassword(body.password, function(err, hash) {
+		if(err === null) {
+			passwd = hash;
+		} else {
+			return callback(err);
+		}
+	});
     if(!this.usernameTaken(body.username)) { //no user with this name
 	var newUser = new User({
 		username: body.username,
-		name: body.name,
+		name: "",
 		email: body.email,
-		points: body.points,
+		points: 0,
+		password: hash,
 		skills: [],
 		interest: [],
 		location: {
-			city: body.city,
-			state: body.state,
-			zip: body.zip
+			city: "",
+			state: "",
+			zip: ""
 		}
 	});
 
@@ -97,10 +126,10 @@ exports.addUser = function(body, callback){
 		newUser.save(function(err, newUser){
 			if(err) {
 				console.log(err);
-//				return callback(err);
+				return callback(err);
 			}
 			console.log("new user: " + newUser);
-//			callback(null, newUser);
+			callback(null, newUser);
 		});
 	}
 };
