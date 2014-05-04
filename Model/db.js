@@ -34,7 +34,7 @@ var postSchema = mongoose.Schema({
 	bounty: Number,
 	title: String,
 	task: String,
-	_poster: String,
+	_poster: Number,
 	skills: [Number],
 	location: {
 		city: String,
