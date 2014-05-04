@@ -49,36 +49,19 @@ var skillSchema = mongoose.Schema({
 	trend_factor: Number
 });
 
-userSchema.methods.getCollectionIDs = function(name){
-	var user = this;
-};
-
-userSchema.pre('save', function(next) {
-	var user = this;
-
-	if(!user.isModified('password')) return next();
-
-	credential.hash(body.password, function(err, hash) {
-		if(err) { console.log(err); return; }
-		var passwd = hash;
-		next();
-	});
-
-});
-
 userSchema.methods.comparePassword = function(candidatePassword, cb) {
 
-		credential.verify(this.passwordHash, candidatePassword, function(err, isValid) {
- 			var msg;
-  			if (err) { throw err; }
-  			if(isValid) {
-  				console.log('Passwords match!');
-  				return cb(null, true);
-  			} else {
-  				console.log('Wrong password.');
-  				return cb("Wrong password", false);
-  			}
-		});
+	credential.verify(this.passwordHash, candidatePassword, function(err, isValid) {
+			var msg;
+			if (err) { throw err; }
+			if(isValid) {
+				console.log('Passwords match!');
+				return cb(null, true);
+			} else {
+				console.log('Wrong password.');
+				return cb("Wrong password", false);
+			}
+	});
 };
 
 User = mongoose.model('User', userSchema);
@@ -141,16 +124,16 @@ exports.getUser = function(uname, callback) {
 
 exports.updateUser = function(user, skills, interests, callback) {
 	var newUser = new User({
-		username: body.username,
-		name: body.name,
-		email: body.email,
-		points: body.points,
+		username: user.username,
+		name: user.name,
+		email: user.email,
+		points: user.points,
 		skills: skills,
 		interest: interests,
 		location: {
-			city: body.city,
-			state: body.state,
-			zip: body.zip
+			city: user.city,
+			state: user.state,
+			zip: user.zip
 		}
 	});
 

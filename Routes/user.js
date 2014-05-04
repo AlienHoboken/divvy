@@ -36,14 +36,14 @@ module.exports = function(db){
 			});
 		},
 		update : function(req, res){
-			console.log(req.user);
-			console.log(req.body);
-			// req.user.city = req.body.city;
-			// req.user.state = req.body.state;
-			// req.user.zip = req.body.zip;
-			// db.updateUser(req.user, req.body.skills, req.body.interests, function(req,res){
-			// 	res.redirect('/');
-			// });
+			if(req.session.user) {
+				req.user.city = req.body.city;
+				req.user.state = req.body.state;
+				req.user.zip = req.body.zip;
+				db.updateUser(req.user, req.body.skills, req.body.interests, function(req,res){
+					res.redirect('/');
+				});
+			}
 		},
 		signup : function(req, res) {
 			var uname = req.body.username;
