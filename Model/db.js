@@ -67,10 +67,10 @@ Skill = mongoose.model('Skill', skillSchema);
 
 exports.usernameTaken = function(uname) {
 	User.find({username: uname}, function (err, users) {
-    	if (err) { console.log(err); }
+		if (err) { console.log(err); }
 
         if(!users) { //no user with this name
-        	return false;
+			return false;
 		} else {
 			return true;
 		}
@@ -113,7 +113,7 @@ exports.getUser = function(uname, callback) {
 		}
 		return user;
 	});
-}
+};
 
 exports.updateUser = function(user, skills, interests, callback) {
 	var newUser = new User({
@@ -137,7 +137,7 @@ exports.updateUser = function(user, skills, interests, callback) {
 		}
 		console.log("updated user: " + updateUser);
 	});
-}
+};
 
 exports.deleteUser = function(body, callback) {
 	User.findOneAndRemove({username: body.username}, function(err, user){

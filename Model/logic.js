@@ -23,9 +23,9 @@ exports.relevantPosts = function(user, posts) {
 		}
 		posts[i].interest_count = interest_count;
 	}
-	posts.sort(function(a, b) {return b.interest_count - a.interest_count});
+	posts.sort(function(a, b) {return b.interest_count - a.interest_count;});
 	return posts;
-}
+};
 
 var postTrendiness = function(post) {
 	var skillValues = [];
@@ -40,7 +40,7 @@ exports.localTrendingPosts = function(user, posts) {
 	for(var i = 0; i < posts.length; j++) {
 		posts[i].trendiness = postTrendiness(posts[i]);
 	}
-	posts = posts.sort(function(a, b) {return b.trendiness - a.trendiness});
+	posts = posts.sort(function(a, b) {return b.trendiness - a.trendiness;});
 	return posts;
 };
 
@@ -48,7 +48,7 @@ exports.globalTrendingPosts = function(posts) {
 	for(var i = 0; i < posts.length; j++) {
 		posts[i].trendiness = postTrendiness(posts[i]);
 	}
-	posts = posts.sort(function(a, b) {return b.trendiness - a.trendiness});
+	posts = posts.sort(function(a, b) {return b.trendiness - a.trendiness;});
 	return posts;
 };
 

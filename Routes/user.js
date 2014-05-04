@@ -1,3 +1,5 @@
+var Logic = require('../Model/logic');
+
 exports.home = function(req, res, db) {
 	res.render('index');
 };
@@ -16,10 +18,6 @@ exports.getposts = function(req, res, db) {
 
 exports.newpost = function(req, res, db) {
 	//get parameters from post
-
-    //send them back to home
-	res.redirect('/');
-    response.end();
 
     //update counts for skills
 };
@@ -40,4 +38,5 @@ exports.login = function(req, res, db) {
 	var password = req.body.user.password;
 
 // login return json of new content
+console.log( Logic.relevantPosts(req.body.user, db.allPosts() ) );
 };
