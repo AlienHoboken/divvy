@@ -13,6 +13,7 @@ var express = require('express'),
 	RedisStore = require('connect-redis')(session),
 	db = require('./Model/db'),
 	user = require('./Routes/user')(db),
+	posting = require('./Routes/posting')(db),
 	api = require('./Routes/api'),
 	redis = require('redis'),
 	logic = require('./Model/logic'),
@@ -66,9 +67,11 @@ app.get('/', user.home);
 app.get('/account', user.account);
 app.get('/api/getposts', api.getposts);
 
+app.get('/user', user.snippet);
+app.get('/listing',posting.post);
+
 app.post('/update', user.update);
 
-app.post('/user-snippet', user.snippet);
 app.post('/newpost', user.newpost);
 app.post('/login', auth.authenticate, user.login);
 app.post('/logout', user.logout);

@@ -14,6 +14,15 @@ module.exports = function(db){
 			}
 		},
 		snippet : function(req, res) {
+			db.User.find({username: req.body.username}, function (err, user) {
+				if (err) { console.log(err) ;}
+
+				if(!user) { //no user with this name
+					res.send("");
+				} else {
+					res.send(user);
+				}
+			});
 		},
 		getposts : function(req, res) {
 		},
