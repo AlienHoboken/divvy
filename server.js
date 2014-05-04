@@ -19,6 +19,7 @@ var express = require('express'),
 	LocalStrategy = require('passport-local').Strategy,
 	bodyParser = require('body-parser'),
 	auth = require('./Model/auth')(passport, LocalStrategy),
+	db = require('./Model/db');
   ejs = require('ejs');
 
 //build redis + trends
