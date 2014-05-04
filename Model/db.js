@@ -98,9 +98,9 @@ exports.addUser = function(body, callback) {
 			username: body.username,
 			name: "",
 			email: body.email,
-			points: 0,
 			password: passwd.hash,
 			salt: passwd.hash,
+			points: 0,
 			skills: [],
 			interest: [],
 			location: {
@@ -109,7 +109,7 @@ exports.addUser = function(body, callback) {
 				zip: ""
 			}
 			});
-			console.log("made object");
+			console.log("made object " + newUser);
     
 			newUser.save(function(err, newUser){
 				if(err) {
