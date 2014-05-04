@@ -32,7 +32,7 @@ rclient.on("error", function (err) {
 //Logic.buildTrends(rclient, skills);
 
 // all environments
-app.set('port', 3000);
+app.set('port', 80);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(cookieParser()); // required before session.
@@ -64,9 +64,9 @@ if ('development' == env) {
 
 app.get('/', user.home);
 app.get('/account', user.account);
-//app.get('/user/:username', user.profile);
+app.get('/user/:username', user.profile);
 app.get('/me', user.me);
-app.get('/user/:username', user.account);
+//app.get('/user/:username', user.account);
 app.get('/api/getposts', api.getposts);
 app.get('/user', user.snippet);
 app.get('/listing/:id', posting.post);

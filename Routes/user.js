@@ -29,8 +29,9 @@ module.exports = function(db){
 			user = req.session.user;
 			
 			if(user) {
-				var thePosts = this.getPostsByPoster(user);
-				res.render('account', {user: req.session.user});
+				db.getPostsByPoster(user,function(err, posts) {
+					res.render('account', {user: req.session.user, posts:posts});
+				});
 			} else {
 				res.redirect('/');
 			}

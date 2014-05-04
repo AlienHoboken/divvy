@@ -31,11 +31,11 @@ var posts = {};
 
           <input type="text" name="email" placeholder="Email" value="<%= user.email || '' %>" />
 
-          <input type="text" name="city" placeholder="City" value="<%= user.city || '' %>" />
+          <input type="text" name="city" placeholder="City" value="<%= user.location.city || '' %>" />
 
-          <input type="text" name="state" placeholder="State" value="<%= user.state || '' %>">
+          <input type="text" name="state" placeholder="State" value="<%= user.location.state || '' %>">
 
-          <input type="text" name="zip" placeholder="Zip" value="<%= user.zip || '' %>">
+          <input type="text" name="zip" placeholder="Zip" value="<%= user.location.zip || '' %>">
 
           <label for="skills">Skills</label>
           <select multiple class="multiselect" id="postSkills" name="skills"></select>
