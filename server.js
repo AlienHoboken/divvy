@@ -77,7 +77,16 @@ app.post('/login', auth.authenticate, user.login);
 app.post('/logout', user.logout);
 app.post('/signup', user.signup);
 
-io.on('newpost', function(socket){
+io.sockets.on('connection', function(socket) {
+	io.on('newpost', function(newPost){
+		db.addPost({bounty:newPost.bounty, task:newPost.task, title:newPost.title, skills:newPost.skills.split(',')}, {_id: newPost.userid, city: newPost.city, state: newPost.state, zip: newPost.zip}, function(err, post) {
+			if(!err) {
+				socket.broadcast.emit('postmade', post);
+			} else {
+				socket.emit('posterror', err);
+			}
+		});		
+	});
 });
 
 server.listen(app.get('port'), function(){
