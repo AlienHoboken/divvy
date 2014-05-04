@@ -61,8 +61,6 @@ if ('development' == env) {
 	app.use(errorhandler());
 }
 
-db.addUser({username: "SAm", email:"sam@bob.com", password:"test1234"});
-
 app.get('/', user.home);
 app.get('/account', user.account);
 app.get('/api/getposts', api.getposts);
