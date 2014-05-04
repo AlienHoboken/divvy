@@ -18,8 +18,7 @@ var userSchema = mongoose.Schema({
 	username: String,
 	name: String,
 	email: String,
-	passwordField: String,
-	saltValue: String,
+	passwordHash: String,
 	points: Number,
 	skills: [String],
 	interest: [String],
@@ -68,6 +67,18 @@ userSchema.pre('save', function(next) {
 });
 
 userSchema.methods.comparePassword = function(candidatePassword, cb) {
+
+		credential.verify(this.passwordHash, candidatePassword, function(err, isValid) {
+ 			var msg;
+  			if (err) { throw err; }
+  			if(isValid) {
+  				console.log('Passwords match!');
+  				return cb(null, true);
+  			} else {
+  				console.log('Wrong password.');
+  				return cb("Wrong password", false);
+  			}
+		});
 };
 
 User = mongoose.model('User', userSchema);
@@ -90,14 +101,12 @@ exports.usernameTaken = function(uname) {
 exports.addUser = function(body, callback) {
 	credential.hash(body.password, function(err, hash) {
 		if(err) { console.log(err); return; }
-		hash = JSON.parse(hash);
 	    if(!exports.usernameTaken(body.username)) { //no user with this name
 			var newUser = new User({
 			username: body.username,
 			name: "",
 			email: body.email,
-			passwordField: hash.hash,
-			saltValue: hash.salt,
+			passwordHash: hash,
 			points: 0,
 			skills: [],
 			interest: [],
@@ -107,7 +116,7 @@ exports.addUser = function(body, callback) {
 				zip: ""
 			}
 			});
-    
+
 			newUser.save(function(err, newUser){
 				if(err) {
 					console.log(err);
@@ -166,7 +175,7 @@ exports.deleteUser = function(body, callback) {
 
 exports.addPost = function(post, user, callback) {
 	var newPost = new Post({
-		date: post.data,
+		date: Date.now(),
 		bounty: post.bounty,
 		title: post.title,
 		task: post.task,
@@ -191,7 +200,7 @@ exports.addPost = function(post, user, callback) {
 
 exports.getPosts = function() {
 	Post.find({}, function(err, posts) {
-		return users;
+		return posts;
 	});
 };
 

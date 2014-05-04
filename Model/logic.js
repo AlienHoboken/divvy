@@ -1,4 +1,5 @@
 exports.localPosts = function(user, posts) {
+	posts = posts || [];
 	var localPosts = [];
 	for(var i = 0; i < posts.length; i++) {
 		if(posts[i].location.city == user.location.city && posts[i].location.state == user.location.state ) { //post in the user's city + state
