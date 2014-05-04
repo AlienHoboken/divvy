@@ -89,10 +89,11 @@ exports.addUser = function(body, callback) {
 		if(err) { console.log(err); return; }
 	
 		console.log("Checking username for password " + hash);
+
 	    exports.usernameTaken(body.username, function(taken) {
 	    	if(!taken) {
-	    	console.log("adding user2");
-			
+	    	console.log("adding user2" + hash);
+
 			var newUser = new User({
 			username: body.username,
 			name: "",
