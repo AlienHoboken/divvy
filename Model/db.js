@@ -90,7 +90,7 @@ exports.addUser = function(body, callback) {
 //	credential.hash(body.password, function(err, hash) {
 //		if(err) { console.log(err); return; }
 	
-		console.log("Checking username for password " + hash);
+		console.log("Checking username for password " + "hash");
 
 	    if(exports.usernameTaken(body.username)) {
 	    	console.log("adding user2" + "hash");
