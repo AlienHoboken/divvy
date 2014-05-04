@@ -81,48 +81,10 @@ exports.usernameTaken = function(uname) {
 };
 
 exports.addUser = function(body, callback) {
-	console.log("adding user");
 	credential.hash(body.password, function(err, hash) {
 		if(err) { console.log(err); return; }
 		hash = JSON.parse(hash);
-
-/*		console.log("Checking username for password " + "hash");
-
-//	    if(exports.usernameTaken(body.username)) {
-	    	console.log("adding user2" + "hash");
-	    	//hash = JSON.parse(hash);
-
-			var newUser = new User({
-			username: body.username,
-			name: "",
-			email: body.email,
-			//password: hash["hash"],
-			//salt: hash["salt"],
-			password: "1234",
-			salt: "5678",
-			points: 0,
-			skills: [],
-			interest: [],
-			location: {
-				city: "",
-				state: "",
-				zip: ""
-			}
-			});
-			console.log("made object " + newUser);
-    
-			newUser.save(function(err, madeUser){
-				if(err) {
-					console.log(err);
-					return callback(err);
-				}
-				console.log("new user: " + madeUser);
-				//callback(null, newUser);
-			});
-//	    } //no user with this name
-//	});*/
-console.log(hash);
-    if(!this.usernameTaken(body.username)) { //no user with this name
+    if(!exports.usernameTaken(body.username)) { //no user with this name
 	var newUser = new User({
 		username: body.username,
 		name: "",
