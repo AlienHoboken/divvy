@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Dashboard</title>
+
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
+  <link rel="stylesheet" href="css/styles.css" type="text/css" />
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+        <header>
+          <div id="logo">
+            <img src="images/logo.png" alt="Divvy Logo">
+          </div>
+        </header><!-- header -->
+
+        <%- partial('partials/_user_forms.ejs') %>
+      </div><!-- end col-lg-2 -->
+
+      <%- partial('partials/feed.ejs') %>
+    </div><!-- end row -->
+  </div><!-- end container -->
+
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>
