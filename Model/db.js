@@ -1,6 +1,7 @@
 var mongoose = require('mongoose'),
-	db = mongoose.connection,
-	credential = require('credential');
+	db = mongoose.connection;
+
+var credential = require('credential');
 
 // Connect to Mongo
 var uristring = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/divvy';
@@ -18,7 +19,6 @@ var userSchema = mongoose.Schema({
 	name: String,
 	email: String,
 	password: String,
-	salt: String,
 	points: Number,
 	skills: [String],
 	interest: [String],
@@ -30,7 +30,7 @@ var userSchema = mongoose.Schema({
 });
 
 var postSchema = mongoose.Schema({
-	data: Date,
+	date: Date,
 	bounty: Number,
 	title: String,
 	task: String,
@@ -68,26 +68,20 @@ Post = mongoose.model('Post', postSchema);
 Skill = mongoose.model('Skill', skillSchema);
 
 exports.usernameTaken = function(uname) {
-	console.log("in usernametaken");
-	var taken = true;
-	User.findOne({username: uname}, function (err, users) {
-    	if (err) { console.log(err); }
+	User.find({username: uname}, function (err, users) {
+    	if (err) { console.log(err) };)
 
         if(!users) { //no user with this name
-        	console.log("free name");
-        	taken = false;
+        	return false;
 		} else {
-			console.log("no free name");
-			console.log(users)
-			taken = true;
+			return true;
 		}
 	});
-	return taken;
 };
 
 exports.addUser = function(body, callback) {
 	console.log("adding user");
-//	credential.hash(body.password, function(err, hash) {
+/*//	credential.hash(body.password, function(err, hash) {
 //		if(err) { console.log(err); return; }
 	
 		console.log("Checking username for password " + "hash");
@@ -124,7 +118,32 @@ exports.addUser = function(body, callback) {
 				//callback(null, newUser);
 			});
 //	    } //no user with this name
-//	});
+//	});*/
+    if(!this.usernameTaken(body.username)) { //no user with this name
+	var newUser = new User({
+		username: body.username,
+		name: "",
+		email: body.email,
+		points: 0,
+		skills: [],
+		interest: [],
+		location: {
+			city: "",
+			state: "",
+			zip: ""
+		}
+	});
+
+    
+		newUser.save(function(err, newUser){
+			if(err) {
+				console.log(err);
+//				return callback(err);
+			}
+			console.log("new user: " + newUser);
+//			callback(null, newUser);
+		});
+	}
 };
 
 exports.getUser = function(uname, callback) {
@@ -173,7 +192,7 @@ exports.deleteUser = function(body, callback) {
 
 exports.addPost = function(post, user, callback) {
 	var newPost = new Post({
-		data: post.data,
+		date: post.data,
 		bounty: post.bounty,
 		title: post.title,
 		task: post.task,
