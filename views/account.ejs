@@ -26,8 +26,6 @@ var posts = {};
 
       <div class="col-lg-8">
 
-        <% var urls = window.location.split('/'); if (urls[1] == 'me') { %>
-
         <form role="form" id="edit-user-form" action="/update" method="POST">
 
           <input type="text" name="name" placeholder="Name" value="<%= user.name || '' %>" />
@@ -49,12 +47,6 @@ var posts = {};
           <input class="btn btn-primary" type="submit" value="Submit" />
 
         </form>
-
-        <% } else { %>
-
-        Don't touch!
-
-        <% } %>
 
         <div class="filter-group">
           <a class="btn selected" data-q="local">COLLECTED</a>
