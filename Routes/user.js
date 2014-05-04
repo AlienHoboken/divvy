@@ -19,7 +19,7 @@ module.exports = function(db){
 			var passwd = req.body.password;
 			var em = req.body.email;
 			db.addUser({username: uname, email: em, password: passwd}, function(err, user){
-				if(err ) {
+				if(!err ) {
 					//do something with user variable
 					res.redirect('/account');
 				} else {
