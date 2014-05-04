@@ -45,6 +45,11 @@
               <p><%= post.bounty %></p>
               <p>Points</p>
             </div><!-- end bounty -->
+            <div class="interested">
+             <% for (var i = 0; i < post.interested; i++) { %>
+              <a href="/account/<%= post.interested[i].username %>" title=""><%= post.interested[i].username %></a>
+             <% } %>
+            </div>
           </div><!-- end row -->
         </div><!-- end post -->
 

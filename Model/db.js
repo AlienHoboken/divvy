@@ -35,6 +35,12 @@ var postSchema = mongoose.Schema({
 	title: String,
 	task: String,
 	_poster: String,
+	link: String,
+	ifCollected: Boolean,
+	interested: [{
+		id: Number,
+		username: String
+	}],
 	skills: [String],
 	location: {
 		city: String,
@@ -162,7 +168,14 @@ exports.addPost = function(post, callback) {
 		bounty: post.bounty,
 		title: post.title,
 		task: post.task,
+<<<<<<< HEAD
 		_poster: post.username,
+=======
+		_poster: user.username,
+		link: post.link,
+		ifCollected: post.ifCollected,
+		interested: [],
+>>>>>>> 23b69de614eebd25137691fb37c04621b6d7a6e0
 		skills: post.skills,
 		location: {
 			city: post.city,
@@ -181,6 +194,34 @@ exports.addPost = function(post, callback) {
 	});
 };
 
+exports.updatePost = function(post, user, callback) {
+	var newPost = {
+		date: Date.now(),
+		bounty: post.bounty,
+		title: post.title,
+		task: post.task,
+		_poster: user.username,
+		link: post.link,
+		ifCollected: post.ifCollected,
+		interested: [],
+		skills: post.skills,
+		location: {
+			city: user.city,
+			state: user.state,
+			zip: user.zip
+		}
+	};
+
+	User.findOneAndUpdate({_id: post._id}, newPost, function(err, updatedPost){
+		if(err) {
+			console.log(err);
+//			return callback(err);
+		}
+		console.log("updated user: " + updatePost);
+		if(callback) return callback();
+	});
+};
+
 exports.getPosts = function(callback) {
 Post.find( function(err, posts) {
 	if (!err){ 
@@ -191,6 +232,19 @@ Post.find( function(err, posts) {
 	}
 	});
 };
+
+exports.getPostsByPoster = function(callback) {
+	var username = user.username;
+	Post.find( {_poster : username}, function(err, posts) {
+		if (!err){ 
+			return callback(null, posts);
+		} else {
+			console.log(err);
+			return callback(err);
+		}
+	});
+};
+
 
 exports.removePost = function(post, callback){
 	Post.findByIdAndRemove(post._id, function(err, post){

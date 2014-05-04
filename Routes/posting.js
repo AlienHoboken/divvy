@@ -7,12 +7,20 @@ module.exports = function(db) {
 			db.post.findOne({_id: id}, function(err, doc) {
         if (doc) {
           res.render('listing', {post: doc});
-        }
-        else {
+        } else {
           res.redirect('/');
         }
-		  }
-    );
-	}
-}
+      });
+    },
+    update: function(req,res){
+      if(req.session.user){
+        var user = req.session.user,
+          post = req.session.post;
+        db.updatePost(post,user,function(){
+
+        });
+      }
+    }
+
+  };
 };

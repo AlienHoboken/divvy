@@ -64,15 +64,17 @@ if ('development' == env) {
 
 app.get('/', user.home);
 app.get('/account', user.account);
+// app.get('/account/:username', user.account);
 app.get('/api/getposts', api.getposts);
 app.get('/user', user.snippet);
 app.get('/listing/:id', posting.post);
+app.get('/logout', user.logout);
 
 app.post('/update', user.update);
 app.post('/newpost', user.newpost);
 app.post('/login', auth.authenticate, user.login);
 app.post('/signup', user.signup);
-app.get('/logout', user.logout);
+app.post('/update_post',posting.update);
 
 io.sockets.on('connection', function(socket) {
 	console.log("New io client connected.");

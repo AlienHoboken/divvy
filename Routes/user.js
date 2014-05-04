@@ -15,8 +15,25 @@ module.exports = function(db){
 			});
 		},
 		account : function(req, res) {
-			if(req.session.user) {
-				res.render('account', {user: req.session.user});
+			var user,
+				matches = /account\/(\w)+/.exec(req.url);
+			if( matches && matches[1] ){
+				// console.log(matches[1]);
+				db.User.find({username: req.body.username}, function (err, theUser) {
+					if (err)  console.log(err) ;
+					if(!theUser) { //no user with this name
+						user = req.session.user;
+					} else {
+						user = theUser;
+					}
+				});	
+			} else {
+				user = req.session.user;
+			}
+
+			if(user) {
+				var thePosts = this.getPostsByPoster(user);
+				res.render('account', {user: user, posts: thePosts});
 			} else {
 				res.redirect('/');
 			}
@@ -32,7 +49,13 @@ module.exports = function(db){
 				}
 			});
 		},
-		getposts : function(req, res) {
+		getPostsByPoster : function(req, res) {
+			if(req.session.user) {
+				var poster = req.user.username;
+				db.getPostsByPoster(poster,function(err,posts){
+					res.send(posts);
+				});
+			}
 		},
 		newpost : function(req, res) {
 			db.addPost({bounty:req.body.bounty, task:req.body.task, title:req.body.title, skills:req.body.skills}, req.session.user, function(err, post) {
