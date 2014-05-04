@@ -66,59 +66,59 @@ User = mongoose.model('User', userSchema);
 Post = mongoose.model('Post', postSchema);
 Skill = mongoose.model('Skill', skillSchema);
 
-exports.usernameTaken = function(uname) {
+exports.usernameTaken = function(uname, callback) {
 	console.log("in usernametaken");
 	User.findOne({username: uname}, function (err, users) {
     	if (err) { console.log(err); }
 
         if(!users) { //no user with this name
         	console.log("free name");
-        	return false;
+        	callback(false);
 		} else {
 			console.log("no free name");
 			console.log(users)
-			return true;
+			callback(true);
 		}
 	});
 };
 
-exports.addUser = function(body, callback){
-	var passwd;
+exports.addUser = function(body, callback) {
 	console.log("adding user");
 	credential.hash(body.password, function(err, hash) {
 		if(err) { console.log(err); return; }
 		passwd = hash;
-	});
-	console.log("Checking username");
-    if(!this.usernameTaken(body.username)) { //no user with this name
-    	console.log("adding user2");
-	/*var newUser = new User({
-		username: body.username,
-		name: "",
-		email: body.email,
-		points: 0,
-		password: passwd,
-		skills: [],
-		interest: [],
-		location: {
-			city: "",
-			state: "",
-			zip: ""
-		}
-	});*/
-console.log("made object");
-    
-		newUser.save(function(err, newUser){
-			if(err) {
-				console.log(err);
-				return callback(err);
+	
+		console.log("Checking username");
+	    this.usernameTaken(body.username.function(taken) {
+	    	if(!taken) {
+	    	console.log("adding user2");
+			var newUser = new User({
+			username: body.username,
+			name: "",
+			email: body.email,
+			points: 0,
+			password: passwd,
+			skills: [],
+			interest: [],
+			location: {
+				city: "",
+				state: "",
+				zip: ""
 			}
-			console.log("new user: " + newUser);
-			//callback(null, newUser);
-		});
-	} else {
-		console.log("No new user");
-	}
+			});
+			console.log("made object");
+    
+			newUser.save(function(err, newUser){
+				if(err) {
+					console.log(err);
+					return callback(err);
+				}
+				console.log("new user: " + newUser);
+				//callback(null, newUser);
+			});
+			}
+	    }); //no user with this name
+	});
 };
 
 exports.getUser = function(uname, callback) {
