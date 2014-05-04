@@ -67,15 +67,16 @@ userSchema.pre('save', function(next) {
 });
 
 userSchema.methods.comparePassword = function(candidatePassword, cb) {
+
 		credential.verify(this.passwordHash, candidatePassword, function(err, isValid) {
  			var msg;
   			if (err) { throw err; }
   			if(isValid) { 
   				console.log('Passwords match!');
-  				return true;
+  				return cb(null, true);
   			} else {
   				console.log('Wrong password.');
-  				return false;
+  				return cb("Wrong password", false);
   			}
 		});
 };
