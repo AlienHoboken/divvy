@@ -18,6 +18,7 @@ var userSchema = mongoose.Schema({
 	name: String,
 	email: String,
 	password: String,
+	salt: String,
 	points: Number,
 	skills: [String],
 	interest: [String],
@@ -98,7 +99,8 @@ exports.addUser = function(body, callback) {
 			name: "",
 			email: body.email,
 			points: 0,
-			password: passwd,
+			password: passwd.hash,
+			salt: passwd.hash,
 			skills: [],
 			interest: [],
 			location: {
