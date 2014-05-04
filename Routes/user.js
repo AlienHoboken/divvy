@@ -1,3 +1,4 @@
+db = require('../Model/db'),
 exports.home = function(req, res, db) {
 	res.render('index');
 };
