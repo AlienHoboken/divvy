@@ -42,5 +42,21 @@ form {
 
   input {
     width: 100%;
+
+    .selected {
+      background-color: fade(@color-second, 40%);
+    }
+  }
+}
+
+#edit-user-form {
+
+  input {
+    width: 100%;
+  }
+
+  input[name=city],
+  input[name=state] {
+    width: 49%;
   }
 }
