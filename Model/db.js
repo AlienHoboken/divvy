@@ -131,7 +131,7 @@ exports.updateUser = function(user, skills, interests, callback) {
 		}
 	});
 
-	User.findOneAndUpdate({username: user.username}, newUser, {function(err, updateUser){
+	User.findOneAndUpdate({username: user.username}, newUser, function(err, updateUser){
 		if(err) {
 			console.log(err);
 //			return callback(err);
