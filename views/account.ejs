@@ -21,22 +21,22 @@
       </div><!-- end col-lg-2 -->
 
       <div class="col-lg-8">
-        <form role="form" id="edit-user-form">
+        <form role="form" id="edit-user-form" action="/update" method="POST">
 
-          <input type="text" name="name" placeholder="Name" value="<%= user.name %>" />
+          <input type="text" name="name" placeholder="Name" value="<%= user.name || '' %>" />
 
-          <input type="text" name="email" placeholder="Email" value="<%= user.email %>" />
+          <input type="text" name="email" placeholder="Email" value="<%= user.email || '' %>" />
 
-          <input type="text" name="city" placeholder="City" value="<%= user.city %>" />
+          <input type="text" name="city" placeholder="City" value="<%= user.city || '' %>" />
 
-          <input type="text" name="state" placeholder="State" value="<%= user.state %>">
+          <input type="text" name="state" placeholder="State" value="<%= user.state || '' %>">
 
-          <input type="text" name="zip" placeholder="Zip" value="<%= user.zip %>">
+          <input type="text" name="zip" placeholder="Zip" value="<%= user.zip || '' %>">
 
-        <label for="skills"></label>
-        <select multiple size="7" id="skills" name="skills">
-
-        </select>
+        <div class="form-group">
+          <label for="skills">Skills</label>
+          <select multiple size="7" id="skills" name="skills"></select>
+        </div>
 
         <input class="btn btn-primary" type="submit" value="Submit" />
 

@@ -21,7 +21,7 @@ var express = require('express'),
 	LocalStrategy = require('passport-local').Strategy,
 	bodyParser = require('body-parser'),
 	auth = require('./Model/auth')(passport, LocalStrategy),
-  ejs = require('ejs');
+	ejs = require('ejs');
 
 //build redis + trends
 var lastTrendRebuild = Date.now();
@@ -66,16 +66,22 @@ app.get('/', user.home);
 app.get('/account', user.account);
 app.get('/api/getposts', api.getposts);
 
+app.post('/update', user.update);
+
 app.post('/user-snippet', user.snippet);
 app.post('/newpost', user.newpost);
 app.post('/login', auth.authenticate, user.login);
-app.post('/logout', auth.authenticate, user.login);
+app.post('/logout', user.logout);
 app.post('/signup', user.signup);
 
+<<<<<<< HEAD
 io.on('newpost', function(socket){
 });
 
 server.listen(app.get('port'), function(){
+=======
+http.createServer(app).listen(app.get('port'), function(){
+>>>>>>> 58510700fac83f808396db818627a5cbba04ac4a
 	console.log('Express server listening on port ' + app.get('port'));
 
     //rebuild trends AFTER response if they are an hour or more stale
