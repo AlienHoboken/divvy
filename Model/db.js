@@ -67,18 +67,18 @@ User = mongoose.model('User', userSchema);
 Post = mongoose.model('Post', postSchema);
 Skill = mongoose.model('Skill', skillSchema);
 
-exports.usernameTaken = function(uname, callback) {
+exports.usernameTaken = function(uname) {
 	console.log("in usernametaken");
 	User.findOne({username: uname}, function (err, users) {
     	if (err) { console.log(err); }
 
         if(!users) { //no user with this name
         	console.log("free name");
-        	callback(false);
+        	return false;
 		} else {
 			console.log("no free name");
 			console.log(users)
-			callback(true);
+			return true;
 		}
 	});
 };
@@ -90,7 +90,7 @@ exports.addUser = function(body, callback) {
 	
 		console.log("Checking username for password " + hash);
 
-	    exports.usernameTaken(body.username, function(taken) {
+	    if(exports.usernameTaken(body.username)) {
 	    	if(!taken) {
 	    	console.log("adding user2" + hash);
 	    	hash = JSON.parse(hash);
@@ -112,16 +112,16 @@ exports.addUser = function(body, callback) {
 			});
 			console.log("made object " + newUser);
     
-			/*newUser.save(function(err, madeUser){
+			newUser.save(function(err, madeUser){
 				if(err) {
 					console.log(err);
 					return callback(err);
 				}
 				console.log("new user: " + madeUser);
 				//callback(null, newUser);
-			});*/
+			});
 			}
-	    }); //no user with this name
+	    } //no user with this name
 	});
 };
 
