@@ -3,8 +3,11 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-header {
+.container {
   margin-top: 30px;
+}
+
+header {
 
   .btn {
     color: darken(@color-second, 40%);
@@ -14,14 +17,68 @@ header {
   }
 }
 
+.filter-group {
+
+  a {
+    margin-top: 10px;
+    padding-left: 0;
+    color: @grey;
+    font-weight: bold;
+    .opacity(.5);
+
+    &:before {
+      content: '\f111\00a0';
+      color: @color-base;
+      font-family: FontAwesome;
+      .opacity(.5);
+    }
+
+    &.selected,
+    &:hover {
+      .opacity(1);
+
+      &:before {
+        .opacity(1);
+      }
+    }
+  }
+}
+
 #mainsearch {
 
   input {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+    width: 90%;
     padding: 7px;
+    background-color: rgba(209, 240, 233, .5);
     border: 2px solid @color-second;
     .rounded(15px);
+
+    & + i {
+      position: relative;
+      left: -35px;
+      .opacity(.3);
+    }
+  }
+
+  a {
+    background-color: @color-second;
+
+    i {
+      color: #fff;
+    }
+  }
+}
+
+.user-forms {
+  margin-top: 4.5em;
+
+  .btn {
+    font-weight: bold;
+    background-color: fade(@color-second, 40%);
+    .rounded(13px);
+
+    &:hover {
+      background-color: @color-second;
+    }
   }
 }

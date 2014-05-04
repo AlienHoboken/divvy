@@ -11,32 +11,64 @@
 </head>
 <body>
   <div class="container">
-
-    <header>
-      <div class="row">
-        <div class="col-lg-2">
+    <div class="row">
+      <div class="col-lg-2">
+        <header>
           <div id="logo">
             <img src="images/logo.png" alt="Divvy Logo">
           </div>
-        </div><!-- end col-lg-2 -->
-        <div class="col-lg-8">
-          <nav>
-            <div class="searchform">
-              <form id="mainsearch">
-                <input type="text" name="searchbar" placeholder="Search" />
-              </form>
-            </div>
-          </nav>
-        </div><!-- end col-lg-8 -->
-        <div class="col-lg-2">
-          <a id="mylist" class="btn selected">MY LIST</a>
-          <a id="alllist" class="btn">ALL</a>
-        </div><!-- end col-lg-2 -->
-      </div><!-- end row -->
-    </header><!-- header -->
+        </header><!-- header -->
 
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 feed">
+        <div class="user-forms">
+          <button id="sign-up-toggle" class="btn btn-primary">SIGN UP</button>
+          <button id="sign-in-toggle" class="btn btn-primary">LOG IN</button>
+        </div>
+
+        <div id="sign-up" style="display:none;">
+          <form>
+            <input type="text" name="name" placeholder="Name" />
+            <input type="text" name="email" placeholder="Email" />
+            <input type="text" name="password" placeholder="Password" />
+            <input type="text" name="password_confirmation" placeholder="Confirm Password" />
+            <input type="submit" value="GO" />
+          </form>
+        </div>
+
+        <div id="sign-in" style="display:none;">
+          <form>
+            <input type="text" name="name" placeholder="Name" />
+            <input type="text" name="password" placeholder="Password" />
+            <input type="submit" value="GO" />
+          </form>
+        </div>
+      </div><!-- end col-lg-2 -->
+
+      <div class="col-lg-8 feed">
+        <nav>
+          <div class="searchform">
+            <div id="mainsearch">
+              <input type="text" name="searchbar" placeholder="Search" />
+              <i class="fa fa-search fa-lg"></i>
+              <a class="btn btn-primary" id="new-post-toggle"><i class="fa fa-plus fa-lg"></i></a>
+            </div>
+          </div>
+        </nav>
+
+        <div id="new-post" style="display:none;">
+          <form>
+            <input type="text" name="title" placeholder="SKILL" />
+            <input type="text" name="points" placeholder="POINTS" />
+            <textarea name="description" placeholder="DESCRIPTION"></textarea>
+            <input type="text" name="location" placeholder="LOCATION" />
+            <input type="submit" value="ADD">
+          </form>
+        </div>
+
+        <div class="filter-group">
+          <a class="btn selected">LOCAL</a>
+          <a class="btn">RELEVANT</a>
+          <a class="btn">ABC</a>
+        </div>
 
         <div class="post">
           <div class="row">
@@ -155,9 +187,10 @@
               <p>25</p>
               <p>Points</p>
             </div><!-- end bounty -->
-        </div><!-- end row -->
-      </div><!-- end post -->
-    </div><!-- end feed -->
+          </div><!-- end row -->
+        </div><!-- end post -->
+      </div><!-- end feed -->
+
     </div><!-- end row -->
   </div><!-- end container -->
 
