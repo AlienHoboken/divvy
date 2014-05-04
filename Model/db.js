@@ -19,8 +19,8 @@ var userSchema = mongoose.Schema({
 	email: String,
 	password: String,
 	points: Number,
-	skills: [{type: Schema.Types.ObjectId, ref: 'Skill' }],
-	interest: [{type: Schema.Types.ObjectId, ref: 'Skill' }],
+	skills: [String],
+	interest: [String],
 	location: {
 		city: String,
 		state: String,
@@ -33,8 +33,8 @@ var postSchema = mongoose.Schema({
 	bounty: Number,
 	title: String,
 	task: String,
-	_poster: {type: Number, ref: 'User' },
-	skills: [{type: Schema.Types.ObjectId, ref: 'Skill' }],
+	_poster: Number,
+	skills: [Number],
 	location: {
 		city: String,
 		state: String,
@@ -98,27 +98,32 @@ exports.addUser = function(body, callback){
 		newUser.save(function(err, newUser){
 			if(err) {
 				console.log(err);
-				return callback(err);
+//				return callback(err);
 			}
 			console.log("new user: " + newUser);
-			callback(null, newUser);
+//			callback(null, newUser);
 		});
 	}
 };
 
+exports.getUser = function(uname, callback) {
+	User.findOne({username: uname}, function(err, user){
+		if(err) {
+			console.log(err);
+//			return callback(err);
+		}
+		return user;
+	});
+}
+
 exports.updateUser(user, skills, interests, callback) {
-/*	var updateSkills;
-	var updateInterests;
-
-	Skill.find()
-
 	var newUser = new User({
 		username: body.username,
 		name: body.name,
 		email: body.email,
 		points: body.points,
-		skills: [],
-		interest: [],
+		skills: skills,
+		interest: interests,
 		location: {
 			city: body.city,
 			state: body.state,
@@ -126,32 +131,22 @@ exports.updateUser(user, skills, interests, callback) {
 		}
 	});
 
-    User.findOne({ username: body.username })
-	.populate('_creator')
-	.exec(function (err, story) {
-	if (err) return handleError(err);
-	console.log('The creator is %s', story._creator.name);
-	// prints "The creator is Aaron"
-	});
-
-	newUser.save(function(err, newUser){
+	User.findOneAndUpdate({username: user.username}, newUser, {function(err, updateUser){
 		if(err) {
 			console.log(err);
-			return callback(err);
+//			return callback(err);
 		}
-		console.log("new user: " + newUser);
-		callback(null, newUser);
-	});*/
+		console.log("updated user: " + updateUser);
+	});
 }
 
 exports.deleteUser = function(body, callback) {
 	User.findOneAndRemove({username: body.username}, function(err, user){
 		if(err) {
 			console.log(err);
-			return callback(err);
+//			return callback(err);
 		}
 		console.log("deleted user: " + user);
-		callback(null, newUser);
 	});
 };
 
@@ -161,8 +156,8 @@ exports.addPost = function(post, user, callback)
 		bounty: post.bounty,
 		title: post.title,
 		task: post.task,
-		_poster: ,
-		skills: ,
+		_poster: user.id,
+		skills: post.skills,
 		location: {
 			city: user.city,
 			state: user.state,
@@ -173,10 +168,16 @@ exports.addPost = function(post, user, callback)
 	newPost.save(function(err, newPost) {
 		if(err) {
 			console.log(err);
-			return callback(err);
+//			return callback(err);
 		}
 		console.log("new post: " + newPost);
-		callback(null, newPost);
+//		callback(null, newPost);
+	});
+};
+
+exports.getPosts = function() {
+	Post.find({}, function(err, posts) {
+		return users;
 	});
 };
 
@@ -184,7 +185,7 @@ exports.removePost = function(post, callback){
 	Post.findByIdAndRemove(post.id, function(err, post){
 		if(err) {
 			console.log(err);
-			return callback(err);
+//			return callback(err);
 		}
 	});
 };
@@ -198,10 +199,10 @@ exports.addSkill = function(skill, callback){
 	newSkill.save(function(err, newSkill) {
 		if(err) {
 			console.log(err);
-			return callback(err);
+//			return callback(err);
 		}
 		console.log("new skill: " + newSkill);
-		callback(null, newSkill);
+//		callback(null, newSkill);
 	});
 };
 
@@ -209,10 +210,10 @@ exports.removeSkill = function(skill, callback){
 	Skill.findOneAndRemove({name: skill.name}, function(err, oldSkill){
 		if(err) {
 			console.log(err);
-			return callback(err);
+//			return callback(err);
 		}
 		console.log("removed skill: " + oldSkill);
-		callback(null, oldSkill);
+//		callback(null, oldSkill);
 	});
 };
 
@@ -224,9 +225,13 @@ exports.updateSkill = function(skill, callback) {
 	Skill.findOneAndUpdate({name: skill.name}, newSkill, function(err, updateSkill){
 		if(err) {
 			console.log(err);
-			return callback(err);
+//			return callback(err);
 		}
 		console.log("updated skill: " + updateSkill);
-		callback(null, updateSkill);
+//		callback(null, updateSkill);
 	});
-}
+};
+
+exports.user = User;
+exports.skill = Skill;
+exports.post = Post;
