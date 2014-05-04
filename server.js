@@ -96,11 +96,12 @@ io.sockets.on('connection', function(socket) {
 	});
 });
 
-var skills = [{name: "Automotive",trend_factor: 0}, {name: "Music", trend_factor: 0}, 
-		{name: "Technology", trend_factor: 0}, {name: "Design", trend_factor: 0}, 
-		{name: "Public Speaking", trend_factor: 0}, {name: "Weaponship", trend_factor: 0}, 
-		{name: "Carpentry", trend_factor: 0}, {name: "Fashion", trend_factor: 0}, 
-		{name: "Dancing", trend_factor: 0}, {name: "Drinking", trend_factor: 0}]
+var skills = [{name: "Automotive",trend_factor: 4}, {name: "Music", trend_factor: 7}, 
+		{name: "Technology", trend_factor: 5}, {name: "Design", trend_factor: 4}, 
+		{name: "Public Speaking", trend_factor: 2}, {name: "Weaponship", trend_factor: 7}, 
+		{name: "Carpentry", trend_factor: 0}, {name: "Fashion", trend_factor: 3}, 
+		{name: "Dancing", trend_factor: 2}, {name: "Drinking", trend_factor: 1}];
+
 
 server.listen(app.get('port'), function(){
 	console.log('Express server listening on port ' + app.get('port'));

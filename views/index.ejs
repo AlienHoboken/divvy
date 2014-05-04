@@ -100,7 +100,7 @@ weekday[6] = "Saturday";
             </div>
 	    <a href="/listing/<%- posts[i]._id %>">
             <div class="col-lg-6">
-              <h1><%= posts[i].title %> <span class="date"><%= weekday[posts[i].date.getDay()] + " " + monthNames[posts[i].date.getMonth()] + " " + posts[i].date.getDate() + ", " + posts[i].date.getFullYear() %></span></h1>
+              <h1><%= posts[i].title %><br /><span class="date"><%= weekday[posts[i].date.getDay()] + " " + monthNames[posts[i].date.getMonth()] + " " + posts[i].date.getDate() + ", " + posts[i].date.getFullYear() %></span></h1>
               <p class="task">"<%= posts[i].task %>"</p>
               <p class="poster">Submitted by: <span><%= posts[i]._poster %></span></p>
             </div>

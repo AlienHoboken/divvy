@@ -168,7 +168,7 @@ exports.addPost = function(post, callback) {
 		bounty: post.bounty,
 		title: post.title,
 		task: post.task,
-		_poster: user.username,
+		_poster: post.username,
 		link: post.link,
 		ifCollected: post.ifCollected,
 		interested: [],

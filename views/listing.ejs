@@ -30,6 +30,19 @@ weekday[6] = "Saturday";
             <a href="/"><img src="/images/logo.png" alt="Divvy Logo"></a>
           </div>
         </header><!-- header -->
+        <% if (user) { %>
+        <div id="user-info">
+          <p><%- (user.name) ? user.name : user.username %></p>
+          <img class="avatar" src="/images/unknown.png" style="width: 64px; height: 64px; border-radius: 10px; margin-bottom: 10px;" />
+          <a class="btn btn-primary">MY POSTS</a> <a class="btn btn-primary" href="/me"><i class="fa fa-pencil fa-lg"></i></a> <a class="btn btn-primary" href="/logout"><i class="fa fa-arrow-circle-o-right fa-lg"></i></a>
+        </div>
+
+        <% } else { %>
+        <div class="user-forms">
+          <button id="sign-up-toggle" class="btn btn-primary">SIGN UP</button>
+          <button id="sign-in-toggle" class="btn btn-primary">LOG IN</button>
+        </div>
+        <% } %>
       </div><!-- end col-lg-2 -->
 
       <div class="col-lg-8">
@@ -37,7 +50,7 @@ weekday[6] = "Saturday";
         <div class="post">
           <div class="row">
             <div class="col-lg-2">
-              <img class="avatar" src="http://placehold.it/100x100" />
+              <img class="avatar" src="/images/unknown.png" style="width: 100px; height: 100px;" />
             </div>
             <div class="col-lg-8">
               <h1><%= post.title %></h1>

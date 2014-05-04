@@ -7,7 +7,7 @@ module.exports = function(db) {
 console.log("Getting " + id);
 		db.post.findOne({_id: id}, function(err, doc) {
         		if (doc) {
-        			  res.render('listing', {post: doc});
+        			  res.render('listing', {user: req.session.user, post: doc});
 		        } else {
         			  res.redirect('/');
         	}

@@ -2,7 +2,7 @@ exports.localPosts = function(user, posts) {
 	posts = posts || [];
 	var localPosts = [];
 	for(var i = 0; i < posts.length; i++) {
-		if(posts[i].location.city == user.location.city && posts[i].location.state == user.location.state ) { //post in the user's city + state
+		if(posts[i].location.city.toUpperCase() == user.location.city.toUpperCase() ) { //post in the user's city + state
 			localPosts.push(posts[i]);
 		}
 	}
@@ -31,11 +31,22 @@ exports.relevantPosts = function(user, posts) {
 };
 
 exports.postTrendiness = function(post) {
+	var skills = [{name: "Automotive",trend_factor: 4}, {name: "Music", trend_factor: 7},
+                {name: "Technology", trend_factor: 5}, {name: "Design", trend_factor: 4},
+                {name: "Public Speaking", trend_factor: 2}, {name: "Weaponship", trend_factor: 7},
+                {name: "Carpentry", trend_factor: 0}, {name: "Fashion", trend_factor: 3},
+                {name: "Dancing", trend_factor: 2}, {name: "Drinking", trend_factor: 1}];
 	var skillValues = [];
 	for(var i = 0; i < post.skills.length; i++) {
-		skillValues.push(post.skills[i].trend_factor);
-		postTrendiness = Math.max.apply(null, skillValues);
+		for(var j = 0; j < skills.length; j++) {
+			if(skills[j].name == post.skills[i]) {
+				skillValues.push(skills[j].trend_factor);
+			}
+		}
+//		skillValues.push(post.skills[i].trend_factor);
 	}
+	postTrendiness = Math.max.apply(null, skillValues);
+	return(postTrendiness);
 };
 
 exports.localTrendingPosts = function(user, posts) {

@@ -1,7 +1,8 @@
 $(document).ready(function() {
 
-  var host = "http://54.86.63.60:3000";
+  var host = "http://54.86.63.60:80";
   var socket = io.connect(host);
+
   socket.on('postmade', function(post) {
 	post = JSON.parse(post);
         $('#posts').prepend('<div class="post">' +
