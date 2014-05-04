@@ -87,12 +87,15 @@ Post = mongoose.model('Post', postSchema);
 Skill = mongoose.model('Skill', skillSchema);
 
 exports.usernameTaken = function(uname) {
+	console.log("in usernametaken");
 	User.find({username: uname}, function (err, users) {
     	if (err) { console.log(err); }
 
         if(!users) { //no user with this name
+        	console.log("free name");
         	return false;
 		} else {
+			console.log("no free name");
 			return true;
 		}
 	});
@@ -105,12 +108,14 @@ exports.addUser = function(body, callback){
 		if(err == null || (typeof err == undefined)) {
 			console.log("Password passed");
 			passwd = hash;
+			console.log("Password passed2");
 		} else {
 			console.log("Password failed");
 			console.log(err);
 			return callback(err);
 		}
 	});
+	console.log("Checking username");
     if(!this.usernameTaken(body.username)) { //no user with this name
     	console.log("adding user2");
 	var newUser = new User({
