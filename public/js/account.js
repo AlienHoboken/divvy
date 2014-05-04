@@ -11,6 +11,12 @@ $(document).ready(function() {
     }
 
     $('#skills').append('<option ' + checked + ' value="' + value + '" name="skills"> ' + value + '</option>');
+
+    if (user_interests.length !== 0 && user_interests.indexOf(value) !== -1) {
+      checked = ' checked="checked" ';
+    }
+
+    $('#interests').append('<option ' + checked + ' value="' + value + '" name="skills"> ' + value + '</option>');
   });
 
 });

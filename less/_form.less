@@ -10,7 +10,7 @@ form {
       color: @color-base;
       margin-bottom: 7px;
       padding: 7px;
-      background: transparent;
+      background: #fff;
       border: 1px solid #fff;
       .rounded(10px);
       .drop-shadow(0, 0, 0, 0);
@@ -51,6 +51,14 @@ form {
 
 #edit-user-form {
 
+  label {
+    margin-left: 10px;
+
+    &:nth-child(6) {
+      margin-left: 0;
+    }
+  }
+
   input {
     width: 100%;
   }
@@ -58,5 +66,17 @@ form {
   input[name=city],
   input[name=state] {
     width: 49%;
+  }
+
+  input[type=checkbox] {
+    width: initial;
+  }
+
+  select {
+    margin-right: 10px;
+  }
+
+  input[type=submit] {
+    margin-top: 10px;
   }
 }
