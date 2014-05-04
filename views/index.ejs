@@ -65,7 +65,8 @@
 
         <div id="new-post" style="display:none;">
           <form id="postform">
-            <input id="postTitle" type="text" name="title" placeholder="SKILL" />
+            <input id="postTitle" type="text" name="title" placeholder="TITLE" />
+            <input id="postSkills" type="text" name="skills" placeholder="SKILL" />
             <input id="postPoints" type="text" name="points" placeholder="POINTS" />
             <textarea id="postTask" name="description" placeholder="DESCRIPTION"></textarea>
             <input id="new-post-submit" type="button" value="ADD">
@@ -79,7 +80,7 @@
         </div>
 
         <div id="posts">
-        <% for (var i = 0; i < posts.length; i++) { %>
+        <% if(posts) { for (var i = 0; i < posts.length; i++) { %>
         <div class="post">
           <div class="row">
             <div class="col-lg-2">
@@ -96,7 +97,7 @@
             </div><!-- end bounty -->
           </div><!-- end row -->
         </div><!-- end post -->
-        <% } %>
+        <% } }%>
         </div>
 
       </div><!-- end feed -->

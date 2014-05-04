@@ -3,8 +3,16 @@ var Logic = require('../Model/logic');
 module.exports = function(db){
 	return {
 		home : function(req, res) {
-			posts = Logic.relevantPosts(req.session.user, db.getPosts());
-			res.render('index', { user: req.session.user, posts: posts });
+			db.getPosts(function(err, posts) {
+				if(!err) {
+				if(req.session.user) { //logged in
+					posts = Logic.relevantPosts(req.session.user, posts);
+				} else {
+					posts = Logic.globalTrendingPosts(posts);
+				}
+				res.render('index', { user: req.session.user, posts: posts });
+				}
+			});
 		},
 		account : function(req, res) {
 			if(req.session.user) {

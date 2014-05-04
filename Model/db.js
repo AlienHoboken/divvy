@@ -35,14 +35,14 @@ var postSchema = mongoose.Schema({
 	title: String,
 	task: String,
 	_poster: String,
-	skills: [Number],
+	skills: [String],
 	location: {
 		city: String,
 		state: String,
 		zip: String
 	}
 
-});
+}, { collection : 'posts' });
 
 var skillSchema = mongoose.Schema({
 	name: String,
@@ -183,9 +183,14 @@ exports.addPost = function(post, user, callback) {
 	});
 };
 
-exports.getPosts = function() {
-	Post.find({}, function(err, posts) {
-		return posts;
+exports.getPosts = function(callback) {
+Post.find( function(err, posts) {
+	if (!err){ 
+		return callback(null, posts);
+	} else {
+		console.log(err);
+		return callback(err);
+	}
 	});
 };
 
