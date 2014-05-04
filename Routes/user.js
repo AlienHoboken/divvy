@@ -1,4 +1,3 @@
-db = require('../Model/db'),
 exports.home = function(req, res, db) {
 	res.render('index');
 };
@@ -15,8 +14,8 @@ exports.getposts = function(req, res, db) {
 
 };
 
-exports.newpost = function(req, res, db) {
-	//get parameters from post
+exports.newpost = function(req, res) {
+	//get parameters from post1
 
     //send them back to home
 	res.redirect('/');
@@ -25,7 +24,8 @@ exports.newpost = function(req, res, db) {
     //update counts for skills
 };
 
-exports.signup = function(req, res, db) {
+exports.signup = function(db) {
+	return function(req, res) {
 	var uname = req.body.username;
 	var passwd = req.body.password;
 	var em = req.body.email;
@@ -40,6 +40,7 @@ exports.signup = function(req, res, db) {
 // add new user
 // log new user in
 // return new content
+	}
 };
 
 exports.login = function(req, res, db) {

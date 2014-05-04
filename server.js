@@ -69,7 +69,7 @@ app.post('/user-snippet', user.snippet);
 app.post('/newpost', user.newpost);
 // app.post('/login', user.login);
 app.post('/login', auth.authenticate, user.login);
-app.post('/signup', user.signup);
+app.post('/signup', user.signup(db));
 
 
 http.createServer(app).listen(app.get('port'), function(){
