@@ -1,9 +1,10 @@
+<<<<<<< HEAD
 var Logic = require('../Model/logic');
 
 module.exports = function(db){
-	return { 
+	return {
 		home : function(req, res) {
-			res.render('index');
+			res.render('index', { user: req.user });
 		},
 		account : function(req, res) {
 			res.render('account');
